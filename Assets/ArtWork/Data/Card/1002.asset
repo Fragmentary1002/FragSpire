@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fd6f78647e698344bfff2e041d6fc52, type: 3}
+  m_Name: 1002
+  m_EditorClassIdentifier: 
+  cardId: 1002
+  isUpgraded: 0
+  cardTitle: rap
+  cardDescription:
+    baseAmount: rap 5
+    upgradedAmount: rap 8
+  cardColor: 0
+  cardIcon: {fileID: 21300000, guid: 13139f097558f3a4691be2d9c64e964e, type: 3}
+  cardCost:
+    baseAmount: 0
+    upgradedAmount: 0
+  cardEffect:
+    baseAmount: 5
+    upgradedAmount: 8
+  type: 1
+  target: 0
+  isBuffs: 0
+  cardBuff: {fileID: 0}
+  buffAmount:
+    baseAmount: 0
+    upgradedAmount: 0
+  targetBuff: 0
