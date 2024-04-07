@@ -5,14 +5,14 @@ using System.IO;
 using Frag;
 using System;
 
-public class BuffGeneratorWindow : EditorWindow
+public class CardGeneratorWindow : EditorWindow
 {
     private string className = "NewBuff";
     private string classPath = @"/Scripts/Store/Data/Buff/BuffClass";
     private string assetPath = "/Scripts/Store/Data/Buff/BuffData";
     private MonoScript createdClassScript;
 
-    [MenuItem("Window/Generator/Buff Generator")]
+    [MenuItem("Window/Buff Generator")]
     public static void ShowWindow()
     {
         GetWindow<BuffGeneratorWindow>("Buff Generator");
@@ -80,15 +80,10 @@ using UnityEngine;
 namespace Frag
 {
 
-    public class " + className + @" : BuffModel
+    public class " + className + @" : BaseCard
     {
-       //基础回调点
-
-        //创造回调点
-        public override void OnCreate(BuffInfo buff) { }
-
-        //移除回调点
-        public override void OnRemoved(BuffInfo buff) { }
+      
+        public override void Apply() { }
 
     }
 }";

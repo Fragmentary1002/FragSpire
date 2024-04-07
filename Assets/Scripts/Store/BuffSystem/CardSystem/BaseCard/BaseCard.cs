@@ -184,9 +184,9 @@ namespace Frag
 
         #region 关于Buff
         [Header("关于Buff")]
+
+
         //是否施加buff
-
-
         [SerializeField]
         private bool isBuffs;
         public bool IsBuffs

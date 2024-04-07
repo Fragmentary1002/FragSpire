@@ -16,7 +16,6 @@ namespace Frag
 
         private BattleInfo battleInfo;
 
-        private FightTestSystem performActionSystem;
 
 
         //public Card TestCard;
@@ -24,7 +23,7 @@ namespace Frag
         public override void Init()
         {
             battleInfo = this.GetModel<BattleInfo>();
-            performActionSystem=this.GetSystem<FightTestSystem>();
+           
            
         }
    
@@ -36,7 +35,7 @@ namespace Frag
         public void Init(Character character)
         {
             battleInfo = this.GetModel<BattleInfo>();
-            performActionSystem = this.GetSystem<FightTestSystem>();
+   
 
             CardCellParent = transform.GetOrAddComponentInChildren<Transform>("Canvas/FightPanel/Cards");
             ////赋值玩家卡组
@@ -85,7 +84,7 @@ namespace Frag
             {
 
                 // 执行卡片的动作。  
-                performActionSystem.PerformAction(card);
+                card.Apply();
 
                 battleInfo.enegry.cur -= card.CardCost;
 
