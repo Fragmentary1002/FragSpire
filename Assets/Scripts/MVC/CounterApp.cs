@@ -13,7 +13,7 @@ public class CounterApp : Architecture<CounterApp>
    
 
         // зЂВс System
-        this.RegisterSystem(new DamageSystem());
+        this.RegisterSystem(new FightTestSystem());
 
         //зЂВс Utility
         this.RegisterUtility(new Storage());

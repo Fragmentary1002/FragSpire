@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Frag
 {
-    public class DamageSystem : AbstractSystem
+    public class FightTestSystem : AbstractSystem
     {
         private Player player;
         private Enemy enemy;
@@ -16,42 +16,6 @@ namespace Frag
             player = this.GetModel<Player>();
             enemy = this.GetModel<Enemy>();
         }
-
-
-        public void SubmitDamage(DamageInfo damageInfo)
-        {
-            if (damageInfo == null) return;
-
-            Fighter creator = damageInfo.creator;
-            Fighter target = damageInfo.target;
-
-
-            target.DoBeDamage(damageInfo.GetDamage());
-
-
-            CallBackFight(creator, CallBackPoint.OnHit);
-
-            CallBackFight(target, CallBackPoint.OnBeHurt);
-
-
-            if (target.IsCanBeKill())
-            {
-                CallBackFight(creator, CallBackPoint.OnKill);
-                CallBackFight(target, CallBackPoint.OnBeKill);
-            }
-           
-            if (target.IsCanBeKill())
-            {
-                CallBackFight(creator, CallBackPoint.OnKill);
-                CallBackFight(target, CallBackPoint.OnBeKill);
-            }
-
-        }
-
-
-
-
-
 
         private void CallBackFight(Fighter fighter, CallBackPoint callBackPoint)
         {

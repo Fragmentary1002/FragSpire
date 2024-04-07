@@ -16,7 +16,7 @@ namespace Frag
 
         private BattleInfo battleInfo;
 
-        private DamageSystem performActionSystem;
+        private FightTestSystem performActionSystem;
 
 
         //public Card TestCard;
@@ -24,7 +24,7 @@ namespace Frag
         public override void Init()
         {
             battleInfo = this.GetModel<BattleInfo>();
-            performActionSystem=this.GetSystem<DamageSystem>();
+            performActionSystem=this.GetSystem<FightTestSystem>();
            
         }
    
@@ -36,7 +36,7 @@ namespace Frag
         public void Init(Character character)
         {
             battleInfo = this.GetModel<BattleInfo>();
-            performActionSystem = this.GetSystem<DamageSystem>();
+            performActionSystem = this.GetSystem<FightTestSystem>();
 
             CardCellParent = transform.GetOrAddComponentInChildren<Transform>("Canvas/FightPanel/Cards");
             ////¸³ÖµÍæ¼Ò¿¨×é
