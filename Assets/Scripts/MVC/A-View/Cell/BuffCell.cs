@@ -18,14 +18,14 @@ namespace Frag
         {
             animator = GetComponent<Animator>();
         }
-        public void LoadBuff(BaseBuff b)
+        public void LoadBuff(BuffInfo b)
         {
             // 播放"IntentSpawn"动画状态。这是通过animator组件来控制的。
             animator.Play("IntentSpawn");
             // 设置buffImage的sprite属性为传入的Buff对象的buffIcon属性，以更新显示图标。  
-            buffImage.sprite = b.buffIcon;
+            buffImage.sprite = b.buffData.icon;
             // 设置buffAmountText的text属性为传入的Buff对象的buffValue属性的字符串形式，以更新显示值
-            buffAmountText.text = b.buffValue.ToString();
+            buffAmountText.text = b.curStack.ToString();
         }
 
         public void PushBuffPool()

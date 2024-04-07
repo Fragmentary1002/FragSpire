@@ -31,7 +31,7 @@ namespace Frag
 
         public int buffAmount;  //施加或给自身buff数值
 
-        public BaseBuff Buff;//施加或给自身buff类型
+        public BuffInfo Buff;//施加或给自身buff类型
 
         public int chance;  // 表示某个意图或动作触发的几率。  
 

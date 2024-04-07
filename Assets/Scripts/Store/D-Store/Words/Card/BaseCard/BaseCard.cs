@@ -196,8 +196,8 @@ namespace Frag
 
         //Ê©¼ÓµÄbuff
         [SerializeField]
-        private BaseBuff cardBuff;
-        public BaseBuff CardBuff
+        private BuffInfo cardBuff;
+        public BuffInfo CardBuff
         {
             get { return cardBuff; }
         }
@@ -230,8 +230,14 @@ namespace Frag
         {
             get { return targetBuff; }
         }
+
+        #endregion
+
+
+
+        public virtual void Apply() {}
     }
-    #endregion
+
 
 
 

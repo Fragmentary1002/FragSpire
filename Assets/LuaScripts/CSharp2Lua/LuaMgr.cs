@@ -37,9 +37,9 @@ public class LuaMgr : BaseManager<LuaMgr>
         DoString(str);
     }
     //自动执行
-    private byte[] MyLoader(ref string filePath)
+    private byte[] MyLoader(ref string filePath )
     {
-        string path = Application.dataPath + "/Lua/" + filePath +".lua";
+        string path = Application.dataPath + "/LuaScripts/Lua" + filePath +".lua";
       
 
         if (File.Exists(path))

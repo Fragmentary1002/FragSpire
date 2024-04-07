@@ -1,10 +1,16 @@
 using UnityEngine;
+using System.Collections;
 using UnityEditor;
 using System.IO;
+using Frag;
+using System;
 
 public class BuffGeneratorWindow : EditorWindow
 {
     private string className = "NewBuff";
+    private string classPath = @"/Scripts/Store/Data/Buff/BuffClass";
+    private string assetPath = "/Scripts/Store/Data/Buff/BuffData";
+    private MonoScript createdClassScript;
 
     [MenuItem("Window/Buff Generator")]
     public static void ShowWindow()
@@ -17,29 +23,53 @@ public class BuffGeneratorWindow : EditorWindow
         GUILayout.Label("Enter class name:");
         className = EditorGUILayout.TextField(className);
 
+        GUILayout.Label("Enter classPath:");
+        classPath = EditorGUILayout.TextField(classPath);
+
+        GUILayout.Label("Enter assetPath:");
+        assetPath = EditorGUILayout.TextField(assetPath);
+
+        GUILayout.Label("Scripts:");
+        createdClassScript = (MonoScript)EditorGUILayout.ObjectField("Class Script", createdClassScript, typeof(MonoScript), false);
+
         if (GUILayout.Button("Generate Buff Class"))
         {
             GenerateNewClassFile();
+        }
+
+        if (GUILayout.Button("Create New Buff"))
+        {
+            CreateNewBuff();
         }
     }
 
     private void GenerateNewClassFile()
     {
-        string defaultDirectory = Application.dataPath;
+        MonoMgr.GetInstance().StartCoroutine(LoadClass());
+    }
+
+    private IEnumerator LoadClass()
+    {
+        // 获取默认的保存目录和文件名
+        string defaultDirectory = Application.dataPath + classPath;
         string defaultFileName = className + ".cs";
 
-        string filePath = EditorUtility.SaveFilePanel("Save Buff Class", defaultDirectory, defaultFileName, "cs");
+        // 拼接文件完整路径
+        string filePath = Path.Combine(defaultDirectory, defaultFileName);
 
-        if (!string.IsNullOrEmpty(filePath))
-        {
-            string classContent = GenerateClassContent(className);
-            File.WriteAllText(filePath, classContent);
+        // 生成类内容
+        string classContent = GenerateClassContent(className);
 
-            AssetDatabase.Refresh();
+        // 将内容写入文件
+        File.WriteAllText(filePath, classContent);
 
-            // 在Unity编辑器中打开新生成的类文件
-            AssetDatabase.OpenAsset(AssetDatabase.LoadAssetAtPath<UnityEngine.Object>(filePath));
-        }
+        // 刷新 Unity 资源
+        AssetDatabase.Refresh();
+
+        // 在 Unity 编辑器中打开新生成的类文件
+        createdClassScript = AssetDatabase.LoadAssetAtPath<MonoScript>(filePath);
+        // AssetDatabase.OpenAsset(createdClassScript);
+        yield return null;
     }
 
     private string GenerateClassContent(string className)
@@ -49,40 +79,60 @@ using UnityEngine;
 
 namespace Frag
 {
-    [CreateAssetMenu(fileName = "" " +className+ @" "", menuName = ""ScriptableObject/BaseBuff/" + className + @" "")]
-    public class " + className + @" : BaseBuff
+
+    public class " + className + @" : BuffModel
     {
-        public override void AfterBeAdded()
-        {
-            // 实现添加后的逻辑
-            EventCenter.GetInstance().AddEventListener<BaseBuff>(this.buffApplyTime.ToString(), ApplyHandler);
-        }
+       //基础回调点
 
-        public override void OnUpdate()
-        {
-            // 实现更新的逻辑
-            base.OnUpdate();
-        }
+        //创造回调点
+        public override void OnCreate(BuffInfo buff) { }
 
-        public override void AfterBeRemoved()
-        {
-            // 实现移除后的逻辑
-            EventCenter.GetInstance().RemoveEventListener<BaseBuff>(this.buffApplyTime.ToString(), ApplyHandler);
-        }
+        //移除回调点
+        public override void OnRemoved(BuffInfo buff) { }
 
-        public override void ApplyHandler(BaseBuff buff)
-        {
-            this.Apply();
-        }
-
-        public override void Apply()
-        {
-            // 实现应用的逻辑
-            base.Apply();
-        }
     }
 }";
 
         return classContent;
+    }
+
+    private void CreateNewBuff()
+    {
+
+        string defaultDirectory = "Assets" + assetPath;
+
+        string defaultFileName = className + ".asset";
+
+        // 创建父目录
+        Directory.CreateDirectory(Path.GetDirectoryName(defaultDirectory));
+
+
+        // 拼接文件完整路径
+        string filePath = Path.Combine(defaultDirectory, defaultFileName);
+
+
+
+
+        Type buffType = createdClassScript.GetClass();
+        if (buffType == null)
+        {
+            Debug.LogError("Failed to get class type from script: " + createdClassScript.name);
+            return;
+        }
+
+        // 创建类实例
+        BuffModel newBuff = (BuffModel)Activator.CreateInstance(buffType);
+        if (newBuff == null)
+        {
+            Debug.LogError("Failed to create instance of class: " + buffType.Name);
+            return;
+        }
+
+        AssetDatabase.CreateAsset(newBuff, filePath);
+        AssetDatabase.SaveAssets();
+        AssetDatabase.Refresh();
+        EditorUtility.FocusProjectWindow();
+        Selection.activeObject = newBuff;
+
     }
 }

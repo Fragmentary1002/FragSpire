@@ -10,9 +10,9 @@ namespace Frag
     public class PoolBuffCommand : AbstractCommand
     {
         Transform buffParent;
-        BaseBuff buff;
+        BuffInfo buff;
 
-        public PoolBuffCommand(Transform buffParent, BaseBuff buff)
+        public PoolBuffCommand(Transform buffParent, BuffInfo buff)
         {
             this.buffParent = buffParent;
             this.buff = buff;
