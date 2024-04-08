@@ -32,7 +32,6 @@ namespace Frag
 
         //viewModel
       //  public FightModel model=new FightModel();
-        private FightModel model;
 
         /// <summary>
         /// 传入战斗状态默认为init
@@ -40,7 +39,7 @@ namespace Frag
         /// <param name="fightType"></param>
         public void Init(FightType fightType = FightType.None)
         {
-            model = this.GetModel<FightModel>();
+           
             ChangeType(fightType);
             return;
         }
@@ -85,7 +84,7 @@ namespace Frag
         private void Update()
         {
             fightUnit?.OnUpdate();
-            model?.UpdateData();
+           
         }
         //指定架构
         public IArchitecture GetArchitecture()

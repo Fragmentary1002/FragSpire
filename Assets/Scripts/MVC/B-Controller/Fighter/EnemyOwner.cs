@@ -1,29 +1,29 @@
-using QFramework;
-using System.Collections.Generic;
+using TJ;
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 
 namespace Frag
 {
 
-
-    public class PoolBuffCommand : AbstractCommand
+    public class EnemyOwner : MonoBehaviour
     {
-        Transform buffParent;
-        BuffInfo buff;
+        public Enemy owner;
 
-        public PoolBuffCommand(Transform buffParent, BuffInfo buff)
+        public FighterHealthBarCell healthBar;
+
+        public Transform buffParent;
+
+        public void OnUpdate()
         {
-            this.buffParent = buffParent;
-            this.buff = buff;
+            //更新防御显示
+            healthBar.DisplayBlock(owner.currentBlock);
+
+            //更新血条显示
+            healthBar.DisplayHealth(owner.hp.cur, owner.hp.max);
         }
 
-        protected override void OnExecute()
-        {
-            DisplayBuffPool();
-        }
-
-        private void DisplayBuffPool()
+        private void DisplayBuffPool(BuffInfo buff)
         {
             PoolMgr.GetInstance().GetObj("Prefabs/UI/Cell/BuffCell", (go) =>
             {
@@ -38,13 +38,10 @@ namespace Frag
                 }
             });
         }
-
-
-
     }
 
 
 
-
 }
+
 
