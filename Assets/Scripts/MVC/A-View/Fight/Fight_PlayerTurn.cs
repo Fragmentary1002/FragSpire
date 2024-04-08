@@ -22,6 +22,9 @@ namespace Frag
             FightCardManager.Instance.InitTrun();
             Debug.Log("³éÅÆ¿ªÊ¼");
             this.SendCommand(new ApplyTimeCommand(ApplyTime.TurnStart));
+
+
+
             FightCardManager.Instance.DrawCards(5);
 
 

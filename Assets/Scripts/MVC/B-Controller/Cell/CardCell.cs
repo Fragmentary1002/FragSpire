@@ -4,6 +4,9 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using TJ;
+using UnityEngine.EventSystems;
+using Unity.Burst.CompilerServices;
+
 
 namespace Frag
 {
@@ -92,17 +95,29 @@ namespace Frag
         }
 
         // 当鼠标结束拖拽卡牌时触发的方法
-        public void HandleEndDrag()
+        public void HandleEndDrag(PointerEventData eventData)
         {
+            Vector3 mousePosition = Input.mousePosition;
 
-            //Debug.Log("当鼠标结束拖拽卡牌时触发的方法 这边调到FightCardManager");
+            // 将屏幕坐标转换为世界坐标
+            Ray ray = Camera.main.ScreenPointToRay(mousePosition);
+            RaycastHit hitInfo;
 
-            if (FightCardManager.Instance.PlayCardAndIsSuccess(this.card))
+            // 发射射线，并检查是否击中了游戏对象
+            if (Physics.Raycast(ray, out hitInfo))
             {
-                animator?.Play("HoverOffCard");
-                PushCardPool();
+                GameObject clickedObject = hitInfo.collider.gameObject;
+
+
+                if (FightCardManager.Instance.PlayCardAndIsSuccess(this.card,clickedObject))
+                {
+                    animator?.Play("HoverOffCard");
+                    PushCardPool();
+                }
+
+
             }
-   
+
             return;
 
 

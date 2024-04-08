@@ -1,3 +1,4 @@
+using QFramework;
 using TJ;
 using Unity.VisualScripting;
 using UnityEditor;
@@ -6,9 +7,9 @@ using UnityEngine;
 namespace Frag
 {
 
-    public class EnemyOwner : MonoBehaviour
+    public class EnemyOwner : MonoBehaviour, IController
     {
-        public Enemy owner;
+        public Enemy owner=new Enemy();
 
         public FighterHealthBarCell healthBar;
 
@@ -21,9 +22,11 @@ namespace Frag
 
             //更新血条显示
             healthBar.DisplayHealth(owner.hp.cur, owner.hp.max);
+
         }
 
-        private void DisplayBuffPool(BuffInfo buff)
+
+        public void DisplayBuffPool(BuffInfo buff)
         {
             PoolMgr.GetInstance().GetObj("Prefabs/UI/Cell/BuffCell", (go) =>
             {
@@ -37,6 +40,13 @@ namespace Frag
                     Tool.Log("buffParentPlayer is null");
                 }
             });
+        }
+
+
+        //指定架构
+        public IArchitecture GetArchitecture()
+        {
+            return CounterApp.Interface;
         }
     }
 

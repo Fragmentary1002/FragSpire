@@ -6,6 +6,7 @@ using UnityEngine;
 namespace Frag
 {
 
+    [SerializeField]
     public class BattleInfo : AbstractModel
     {
 
@@ -46,12 +47,12 @@ namespace Frag
         /// </summary>
         public void UpdateInfo()
         {
-            EventCenter.GetInstance().EventTrigger<BattleInfo>("FightData", this);
+            EventCenter.GetInstance().EventTrigger("BattleInfo");
         }
 
         public void OnDestroy()
         {
-            EventCenter.GetInstance().RemoveEventListener("FightUpdate", UpdateData);
+            EventCenter.GetInstance().RemoveEventListener("BattleInfo", UpdateData);
         }
 
 

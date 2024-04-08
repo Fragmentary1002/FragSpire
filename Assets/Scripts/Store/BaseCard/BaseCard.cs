@@ -1,5 +1,7 @@
+using QFramework;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Frag
@@ -33,7 +35,7 @@ namespace Frag
     #endregion
 
     [CreateAssetMenu(fileName = "Card", menuName = "ScriptableObject/Card")]
-    public class BaseCard : ScriptableObject
+    public class BaseCard : ScriptableObject, ICanSendCommand
     {
         #region 基础
 
@@ -123,7 +125,6 @@ namespace Frag
         #region 关于基础数值
 
         [Header("关于基础数值")]
-
         // 卡牌费用
         [SerializeField]
         private ScardAmount cardCost;
@@ -144,19 +145,33 @@ namespace Frag
 
         // 卡牌数值
         [SerializeField]
-        private ScardAmount cardEffect;
-        public int CardEffect
+        private ScardAmount cardAttack;
+        public int CardAttack
         {
             get
             {
                 if (!isUpgraded)
-                    return cardEffect.baseAmount;
+                    return cardAttack.baseAmount;
                 else
-                    return cardEffect.upgradedAmount;
+                    return cardAttack.upgradedAmount;
             }
         }
 
 
+
+        // 卡牌数值
+        [SerializeField]
+        private ScardAmount cardDefense;
+        public int CardDefense
+        {
+            get
+            {
+                if (!isUpgraded)
+                    return cardDefense.baseAmount;
+                else
+                    return cardDefense.upgradedAmount;
+            }
+        }
 
 
 
@@ -186,13 +201,13 @@ namespace Frag
         [Header("关于Buff")]
 
 
-        //是否施加buff
-        [SerializeField]
-        private bool isBuffs;
-        public bool IsBuffs
-        {
-            get { return isBuffs; }
-        }
+        ////是否施加buff
+        //[SerializeField]
+        //private bool isBuffs;
+        //public bool IsBuffs
+        //{
+        //    get { return isBuffs; }
+        //}
 
         //施加的buff
         [SerializeField]
@@ -235,7 +250,13 @@ namespace Frag
 
 
 
-        public virtual void Apply() {}
+        public virtual void Apply(Fighter creator, Fighter target) { }
+
+
+        public IArchitecture GetArchitecture()
+        {
+            return CounterApp.Interface;
+        }
     }
 
 

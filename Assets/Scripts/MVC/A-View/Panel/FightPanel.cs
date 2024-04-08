@@ -8,6 +8,7 @@ using XFramework;
 using XFramework.Extend;
 using System.Threading.Tasks;
 using Unity.VisualScripting;
+using QFramework;
 
 namespace Frag
 {
@@ -21,7 +22,7 @@ namespace Frag
     /// <summary>
     /// 开始面板
     /// </summary>
-    public class FightPanel : BasePanel
+    public class FightPanel : BasePanel,IController
     {
         //寻找控件，逻辑处理，数据更新
         /// <summary>
@@ -46,7 +47,7 @@ namespace Frag
         public Animator banner; // UI横幅动画器，用于展示胜利或失败信息。  
 
         //model
-
+        public BattleInfo battleInfo;
         /// <summary>
         /// 开始面板
         /// </summary>
@@ -57,6 +58,8 @@ namespace Frag
 
         protected override void InitEvent()
         {
+            battleInfo=this.GetModel<BattleInfo>();
+
             InitE();
 
             InitUIName();
@@ -66,9 +69,9 @@ namespace Frag
         }
         private void InitE()
         {
-            EventCenter.GetInstance().AddEventListener<BattleInfo>("FightData", UpdateInfo);
+            EventCenter.GetInstance().AddEventListener("Battle", UpdateInfo);
 
-            EventCenter.GetInstance().AddEventListener<BattleInfo>("FightData", InitPrefabs);
+            EventCenter.GetInstance().AddEventListener("Battle", InitPrefabs);
 
             EventCenter.GetInstance().AddEventListener("Unit", BannerOut);
 
@@ -97,7 +100,7 @@ namespace Frag
 
         }
 
-        private void InitPrefabs(BattleInfo battleInfo)
+        private void InitPrefabs()
         {
          
             try
@@ -107,7 +110,7 @@ namespace Frag
                     if (playerParent != null)
                     {
                         go.transform.SetParent(playerParent);
-
+                        FightCardManager.Instance.player = go.GetComponent<PlayerOwner>().owner;
                     }
                 }
                 );
@@ -126,7 +129,7 @@ namespace Frag
                 return;
             }
 
-            EventCenter.GetInstance().RemoveEventListener<BattleInfo>("FightData", InitPrefabs);
+            EventCenter.GetInstance().RemoveEventListener("Battle", InitPrefabs);
 
         }
 
@@ -162,7 +165,7 @@ namespace Frag
 
 
 
-        public void UpdateInfo(BattleInfo battleInfo)
+        public void UpdateInfo()
         {
             if (battleInfo == null)
             {
@@ -197,9 +200,13 @@ namespace Frag
         public override void OnDestroyOrSetActive(bool isDestroy = false)
         {
             base.OnDestroyOrSetActive();
-            EventCenter.GetInstance().RemoveEventListener<BattleInfo>("FightData", UpdateInfo);
+            EventCenter.GetInstance().RemoveEventListener("Battle", UpdateInfo);
 
         }
-
+        //指定架构
+        public IArchitecture GetArchitecture()
+        {
+            return CounterApp.Interface;
+        }
     }
 }

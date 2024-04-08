@@ -228,7 +228,7 @@ namespace Frag
 
     public class " + className + @" : BaseCard
     {
-        public override void Apply() { }
+        public override void Apply(DamageInfo damageInfo) { }
 
         
     }

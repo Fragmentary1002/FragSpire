@@ -4,6 +4,8 @@ using UnityEngine;
 using Unity.VisualScripting;
 using XFramework.Extend;
 using QFramework;
+using static UnityEngine.GraphicsBuffer;
+
 namespace Frag
 {
     /// <summary>
@@ -16,17 +18,17 @@ namespace Frag
 
         private BattleInfo battleInfo;
 
-
+        public Player player;
 
         //public Card TestCard;
         #region 初始化
         public override void Init()
         {
             battleInfo = this.GetModel<BattleInfo>();
-           
-           
+
+
         }
-   
+
 
         /// <summary>
         /// 初始化卡组
@@ -35,7 +37,7 @@ namespace Frag
         public void Init(Character character)
         {
             battleInfo = this.GetModel<BattleInfo>();
-   
+
 
             CardCellParent = transform.GetOrAddComponentInChildren<Transform>("Canvas/FightPanel/Cards");
             ////赋值玩家卡组
@@ -61,7 +63,7 @@ namespace Frag
         /// <summary>
         /// 用于玩家出一张卡片
         /// </summary>
-        public bool PlayCardAndIsSuccess(BaseCard card)
+        public bool PlayCardAndIsSuccess(BaseCard card, GameObject obj)
         {
 
             if (card == null)
@@ -83,8 +85,16 @@ namespace Frag
             try
             {
 
-                // 执行卡片的动作。  
-                card.Apply();
+                Player creator = player;
+
+                Enemy target = obj.transform.GetComponent<EnemyOwner>().owner;
+
+                if (creator != null && target!=null)
+                {
+
+                    // 执行卡片的动作。  
+                    card.Apply(creator, target);
+                }
 
                 battleInfo.enegry.cur -= card.CardCost;
 
@@ -98,7 +108,7 @@ namespace Frag
                 return false;
             }
 
-   
+
             return true;
 
         }
