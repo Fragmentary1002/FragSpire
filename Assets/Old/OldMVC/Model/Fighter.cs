@@ -13,6 +13,7 @@ namespace TJ
         public int maxHealth;
         // 当前阻挡值，默认为0
         public int currentBlock = 0;
+
         // 战斗者生命条对象
         public FighterHealthBar fighterHealthBar;
 

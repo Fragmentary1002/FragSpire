@@ -29,26 +29,20 @@ namespace Frag
         /// </summary>
         static readonly string path = "Prefabs/UI/Panel/FightPanel";
 
-        //view
-        FighterHealthBarCell healthBarPlayer;
-        FighterHealthBarCell healthBarEnemy;
-
-        Transform playerParent;
-        Transform enemyParent;
+        //view   
+        public Transform playerParent;
+        public Transform enemyParent;
 
 
-        Transform buffParentPlayer;
-        Transform buffParentEnemy;
 
-        private TMP_Text energyText;// 能量值文本显示组件
-        private TMP_Text drawPileText;
-        private TMP_Text discardPileText;
-        private TMP_Text cemeteryText; //等待开发
-        private TMP_Text BannerText;
+        public TMP_Text energyText;// 能量值文本显示组件
+        public TMP_Text drawPileText;
+        public TMP_Text discardPileText;
+        public TMP_Text cemeteryText; //等待开发
+        public TMP_Text BannerText;
 
-        private Image playerIcon;
 
-        private Button endTurn;
+        public Button endTurn;
         public Animator banner; // UI横幅动画器，用于展示胜利或失败信息。  
 
         //model
@@ -90,6 +84,10 @@ namespace Frag
             banner = ActivePanel.GetOrAddComponentInChildren<Animator>("Banner");
 
             endTurn = ActivePanel.GetOrAddComponentInChildren<Button>("EndTurn");
+
+
+            playerParent = ActivePanel.GetOrAddComponentInChildren<Transform>("PlayerParent");
+            enemyParent = ActivePanel.GetOrAddComponentInChildren<Transform>("EnemyParent");
         }
         private void InitClick()
         {
@@ -101,8 +99,7 @@ namespace Frag
 
         private void InitPrefabs(FightModel fightModel)
         {
-            playerParent = ActivePanel.GetOrAddComponentInChildren<Transform>("PlayerParent");
-            enemyParent = ActivePanel.GetOrAddComponentInChildren<Transform>("EnemyParent");
+         
             try
             {
                 ResMgr.GetInstance().LoadAsync<GameObject>("Prefabs/Fighter/BasePlayer", (go) =>
@@ -110,8 +107,7 @@ namespace Frag
                     if (playerParent != null)
                     {
                         go.transform.SetParent(playerParent);
-                        healthBarPlayer = go.transform.GetOrAddComponentInChildren<FighterHealthBarCell>("FighterHealthBarCell");
-                        buffParentPlayer = go.transform.GetOrAddComponentInChildren<Transform>("FighterHealthBarCell/BuffParent");
+
                     }
                 }
                 );
@@ -120,9 +116,7 @@ namespace Frag
                     if (enemyParent != null)
                     {
                         go.transform.SetParent(enemyParent);
-                        healthBarEnemy = go.transform.GetOrAddComponentInChildren<FighterHealthBarCell>("FighterHealthBarCell");
 
-                        buffParentEnemy = go.transform.GetOrAddComponentInChildren<Transform>("FighterHealthBarCell/BuffParent");
                     }
                 }
                 );
@@ -133,6 +127,7 @@ namespace Frag
             }
 
             EventCenter.GetInstance().RemoveEventListener<FightModel>("FightData", InitPrefabs);
+
         }
 
 
@@ -177,17 +172,6 @@ namespace Frag
 
             try
             {
-                //更新血条显示
-
-                healthBarPlayer?.DisplayHealth(fightModel.healthCount, fightModel.maxHealthCount);
-
-                healthBarEnemy?.DisplayHealth(fightModel.healthCountEnemy, fightModel.maxHealthCountEnemy);
-
-                //更新防御显示
-                healthBarPlayer?.DisplayBlock(fightModel.blockNumberCount);
-
-                healthBarEnemy?.DisplayHealth(fightModel.healthCountEnemy, fightModel.maxHealthCountEnemy);
-
 
                 ////更新能量
                 energyText.text = fightModel.enegryCount.ToString();

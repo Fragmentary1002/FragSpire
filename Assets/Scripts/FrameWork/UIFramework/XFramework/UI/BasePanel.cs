@@ -9,7 +9,7 @@ namespace XFramework
     /// 所有UI的父类
     /// 用来控制UI的状态
     /// </summary>
-    public abstract class BasePanel :MonoBehaviour
+    public abstract class BasePanel
     {
         private Transform activePanel;
         private PanelManager panelManager;

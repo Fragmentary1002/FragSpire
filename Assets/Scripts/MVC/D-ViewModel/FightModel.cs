@@ -21,30 +21,6 @@ namespace Frag
 
         //FighterHealthBarCell
 
-
-        public Player player;
-
-
-        public string playerPrefabId { get; private set; }
-
-
-        public int maxHealthCount { get; private set; }
-
-        public int blockNumberCount { get; private set; }
-
-
-
-        public Enemy enemy;
-
-        public string enemyPrefabId { get; private set; }
-
-        public int healthCount { get; private set; }
-
-        public int maxHealthCountEnemy { get; private set; }
-        public int blockNumberCountEnemy { get; private set; }
-        public int healthCountEnemy { get; private set; }
-
-
         public BattleInfo battleInfo;
 
 
@@ -61,10 +37,7 @@ namespace Frag
 
             //enemyPrefabId = EnemyActionSystem.Instance.GetFighterId();
 
-            player = this.GetModel<Player>();
-
-            enemy = this.GetModel<Enemy>();
-            
+         
             battleInfo = this.GetModel<BattleInfo>();
 
             EventCenter.GetInstance().AddEventListener("FightUpdate", UpdateData);
@@ -105,9 +78,7 @@ namespace Frag
             drawPileCount = PlayerPrefs.GetInt("drawPileCount", 7);
             discardPileCount = PlayerPrefs.GetInt("discardPileCount", 0);
             cemeteryCount = PlayerPrefs.GetInt("cemeteryCount");
-            blockNumberCount = PlayerPrefs.GetInt("blockNumberCount");
-            healthCount = PlayerPrefs.GetInt("healthCount", 100);
-            maxHealthCount = PlayerPrefs.GetInt("maxHealthCount", 100);
+         
         }
 
         /// <summary>
@@ -137,26 +108,6 @@ namespace Frag
             drawPileCount = battleInfo.drawPile.Count;
 
             discardPileCount = battleInfo.discardPile.Count;
-
-
-
-            //player = PlayerActionManager.Instance.GetFighter();
-
-
-            maxHealthCount = player.hp.max;
-
-            healthCount = player.hp.cur;
-
-            blockNumberCount = player.currentBlock;
-
-
-            // enemy = EnemyActionSystem.Instance.GetFighter();
-
-            maxHealthCountEnemy = enemy.hp.max;
-
-            healthCountEnemy = enemy.hp.cur;
-
-            blockNumberCountEnemy = enemy.currentBlock;
 
         }
     }
