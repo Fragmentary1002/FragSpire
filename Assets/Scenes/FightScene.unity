@@ -870,6 +870,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: FightPanel
       objectReference: {fileID: 0}
+    - target: {fileID: 7990998848468318054, guid: 32b8a4f1e155e4640a976dc9e3d76c2f, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 32b8a4f1e155e4640a976dc9e3d76c2f, type: 3}
 --- !u!1 &1792745485
@@ -1005,7 +1009,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1823647830
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -66,9 +66,9 @@ namespace Frag
         }
         private void InitE()
         {
-            EventCenter.GetInstance().AddEventListener<FightModel>("FightData", UpdateInfo);
+            EventCenter.GetInstance().AddEventListener<BattleInfo>("FightData", UpdateInfo);
 
-            EventCenter.GetInstance().AddEventListener<FightModel>("FightData", InitPrefabs);
+            EventCenter.GetInstance().AddEventListener<BattleInfo>("FightData", InitPrefabs);
 
             EventCenter.GetInstance().AddEventListener("Unit", BannerOut);
 
@@ -97,7 +97,7 @@ namespace Frag
 
         }
 
-        private void InitPrefabs(FightModel fightModel)
+        private void InitPrefabs(BattleInfo battleInfo)
         {
          
             try
@@ -126,7 +126,7 @@ namespace Frag
                 return;
             }
 
-            EventCenter.GetInstance().RemoveEventListener<FightModel>("FightData", InitPrefabs);
+            EventCenter.GetInstance().RemoveEventListener<BattleInfo>("FightData", InitPrefabs);
 
         }
 
@@ -162,9 +162,9 @@ namespace Frag
 
 
 
-        public void UpdateInfo(FightModel fightModel)
+        public void UpdateInfo(BattleInfo battleInfo)
         {
-            if (fightModel == null)
+            if (battleInfo == null)
             {
                 Debug.Log("fightModel不存在");
                 return;
@@ -174,14 +174,14 @@ namespace Frag
             {
 
                 ////更新能量
-                energyText.text = fightModel.enegryCount.ToString();
+                energyText.text = battleInfo.enegry.cur.ToString();
 
                 //更新抽牌堆
-                drawPileText.text = fightModel.drawPileCount.ToString();
+                drawPileText.text = battleInfo.drawPile.Count.ToString();
 
                 //更新弃牌堆
 
-                discardPileText.text = fightModel.discardPileCount.ToString();
+                discardPileText.text = battleInfo.discardPile.Count.ToString();
 
                 ////更新墓地
                 //cemeteryText.text = fightModel.cemeteryCount.ToString();
@@ -197,7 +197,7 @@ namespace Frag
         public override void OnDestroyOrSetActive(bool isDestroy = false)
         {
             base.OnDestroyOrSetActive();
-            EventCenter.GetInstance().RemoveEventListener<FightModel>("FightData", UpdateInfo);
+            EventCenter.GetInstance().RemoveEventListener<BattleInfo>("FightData", UpdateInfo);
 
         }
 

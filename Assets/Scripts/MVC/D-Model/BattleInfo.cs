@@ -24,10 +24,34 @@ namespace Frag
 
         public Enegry enegry = new Enegry();
 
+
         protected override void OnInit()
         {
+            EventCenter.GetInstance().AddEventListener("FightUpdate", UpdateData);
+
             return;
-  
+
+        }
+        /// <summary>
+        /// 更新
+        /// </summary>
+        public void UpdateData()
+        {
+            UpdateInfo();
+        }
+
+
+        /// <summary>
+        /// 通知view层更新
+        /// </summary>
+        public void UpdateInfo()
+        {
+            EventCenter.GetInstance().EventTrigger<BattleInfo>("FightData", this);
+        }
+
+        public void OnDestroy()
+        {
+            EventCenter.GetInstance().RemoveEventListener("FightUpdate", UpdateData);
         }
 
 
