@@ -55,9 +55,12 @@ namespace Frag
             try
             {
                 List<ILoot> list = new List<ILoot>();
+
                 //强制类型转换 LINQ
                 list = enemy.monster.IntentList.Cast<ILoot>().ToList();
+
                 ILoot loot = lootBag.GetDroppedItem(list);
+
                 newEnemyIntent = loot as BaseIntent;
 
                 ChangeType(newEnemyIntent);

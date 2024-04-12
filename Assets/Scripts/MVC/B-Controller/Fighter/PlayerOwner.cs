@@ -1,5 +1,4 @@
 using QFramework;
-using TJ;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
@@ -22,7 +21,6 @@ namespace Frag
 
             EventCenter.GetInstance().AddEventListener("Battle", OnUpdate);
 
-            EventCenter.GetInstance().AddEventListener<BuffInfo>("Battle", DisplayBuffPool);
         }
 
         public void OnUpdate()

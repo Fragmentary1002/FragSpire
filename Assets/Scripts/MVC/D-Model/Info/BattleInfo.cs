@@ -45,14 +45,14 @@ namespace Frag
         /// <summary>
         /// 通知view层更新
         /// </summary>
-        public void UpdateInfo()
+        private void UpdateInfo()
         {
-            EventCenter.GetInstance().EventTrigger("BattleInfo");
+            EventCenter.GetInstance().EventTrigger("Battle");
         }
 
         public void OnDestroy()
         {
-            EventCenter.GetInstance().RemoveEventListener("BattleInfo", UpdateData);
+            EventCenter.GetInstance().RemoveEventListener("Battle", UpdateData);
         }
 
 

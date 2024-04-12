@@ -112,6 +112,10 @@ namespace Frag
                         go.transform.SetParent(playerParent);
                         FightCardManager.Instance.player = go.GetComponent<PlayerOwner>().owner;
                     }
+                    else
+                    {
+                        Tool.Log("没有生成play", LogLevel.Warning);
+                    }
                 }
                 );
                 ResMgr.GetInstance().LoadAsync<GameObject>("Prefabs/Fighter/BaseEnemy", (go) =>
@@ -121,11 +125,16 @@ namespace Frag
                         go.transform.SetParent(enemyParent);
 
                     }
+                    else
+                    {
+                        Tool.Log("没有生成enemy", LogLevel.Warning);
+                    }
                 }
                 );
             }
             catch
             {
+                Tool.Log("没有生成", LogLevel.Warning);
                 return;
             }
 
