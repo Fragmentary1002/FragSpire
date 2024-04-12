@@ -11,7 +11,7 @@ public class CounterApp : Architecture<CounterApp>
         
 
         // зЂВс System
-    
+        this.RegisterSystem(new EnemyIntentSystem());
 
         //зЂВс Utility
         this.RegisterUtility(new Storage());

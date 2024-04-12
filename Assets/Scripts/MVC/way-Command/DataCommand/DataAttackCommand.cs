@@ -4,12 +4,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HurtCommand : AbstractCommand
+public class DataAttackCommand : AbstractCommand
 {
 
     DamageInfo damageInfo = null;
 
-    public HurtCommand(DamageInfo damageInfo)  
+    public DataAttackCommand(DamageInfo damageInfo)  
     {
         this.damageInfo = damageInfo;
     }

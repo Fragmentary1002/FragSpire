@@ -4,11 +4,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BuffCommand : AbstractCommand
+public class DataBuffCommand : AbstractCommand
 {
     Fighter target;
     BuffInfo buffInfo;
-    public BuffCommand(Fighter target,BuffInfo buffInfo)
+    public DataBuffCommand(Fighter target,BuffInfo buffInfo)
     {
         this.target = target;
         this.buffInfo = buffInfo;

@@ -24,9 +24,7 @@ namespace Frag
             this.SendCommand(new ApplyTimeCommand(ApplyTime.TurnStart));
 
 
-
             FightCardManager.Instance.DrawCards(5);
-
 
 
         }
@@ -39,7 +37,7 @@ namespace Frag
         public override void OnDestroy()
         {
 
-            //  EnemyManager.Instance.DisplayReset();
+            //EnemyManager.Instance.DisplayReset();
          
 
             //回合结束丢弃手牌

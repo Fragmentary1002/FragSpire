@@ -14,14 +14,14 @@ namespace Frag
         public BuffCell intentUI;
 
         // 显示敌人的意图  
-        public void DisplayIntent(EnemyAction enemyAction)
-        {
-            intentIcon.sprite = enemyAction.icon;
-            intentAmount.text = enemyAction.amount.ToString();
+        //public void DisplayIntent(EnemyAction enemyAction)
+        //{
+        //    intentIcon.sprite = enemyAction.icon;
+        //    intentAmount.text = enemyAction.amount.ToString();
 
-            // 播放Buff出现的动画  
-            //intentUI.animator.Play("IntentSpawn");
-        }
+        //    // 播放Buff出现的动画  
+        //    //intentUI.animator.Play("IntentSpawn");
+        //}
 
     }
 }

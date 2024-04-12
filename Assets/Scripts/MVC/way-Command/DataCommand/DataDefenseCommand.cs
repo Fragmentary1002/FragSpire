@@ -6,11 +6,11 @@ using UnityEngine;
 namespace Frag
 {
 
-    public class DefenseCommand : AbstractCommand
+    public class DataDefenseCommand : AbstractCommand
     {
         int amount;
         Fighter target;
-        public DefenseCommand(Fighter target, int amount)
+        public DataDefenseCommand(Fighter target, int amount)
         {
             this.amount = amount;
             this.target = target;   
