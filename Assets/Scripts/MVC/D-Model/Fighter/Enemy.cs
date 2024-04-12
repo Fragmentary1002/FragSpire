@@ -10,10 +10,10 @@ namespace Frag
     {
 
 
-        public Monster monster;
+        public BaseMonster monster;
         protected override void OnInit()
         {
-            this.monster = GameApp.Instance.monster ?? (new Monster());
+            this.monster = GameApp.Instance.monster ?? (new BaseMonster());
             hp.max = monster.startHealth;
             hp.cur = monster.startHealth;
 

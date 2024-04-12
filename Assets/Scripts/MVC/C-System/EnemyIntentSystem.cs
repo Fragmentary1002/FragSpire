@@ -1,6 +1,7 @@
 using QFramework;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 
@@ -30,26 +31,47 @@ namespace Frag
 
         //public List<Enemy> enemies = new List<Enemy>();
 
-        public List<EnemyIntent> enemyActionList = new List<EnemyIntent>();
+        public Enemy enemy;
 
-        EnemyIntent newEnemyIntent;
+        public LootBag lootBag;
+
+
+        BaseIntent newEnemyIntent;
 
         private int trunCnt = 0;
+
         public EnemyIntentCell cell;
 
         protected override void OnInit()
         {
             //  throw new System.NotImplementedException(); 
+            lootBag = this.GetUtility<LootBag>();
+
         }
 
-      
-        private void Start()
+        public void StartTurn()
         {
-            //cell = FindObjectOfType<EnemyIntentCell>();
+
+            try
+            {
+                List<ILoot> list = new List<ILoot>();
+                //强制类型转换 LINQ
+                list = enemy.monster.IntentList.Cast<ILoot>().ToList();
+                ILoot loot = lootBag.GetDroppedItem(list);
+                newEnemyIntent = loot as BaseIntent;
+
+                ChangeType(newEnemyIntent);
+
+            }
+            catch
+            {
+                Tool.Log("CreateIntent 生成失效", LogLevel.Error);
+            }
+
         }
 
 
-        public void ChangeType(EnemyIntent enemyIntent)
+        private void ChangeType(BaseIntent enemyIntent)
         {
 
             //EnemyAction neweNemyAction = enemyActionList[trunCnt];

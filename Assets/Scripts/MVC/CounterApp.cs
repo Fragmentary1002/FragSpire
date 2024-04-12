@@ -15,5 +15,6 @@ public class CounterApp : Architecture<CounterApp>
 
         //зЂВс Utility
         this.RegisterUtility(new Storage());
+        this.RegisterUtility(new LootBag());
     }
 }

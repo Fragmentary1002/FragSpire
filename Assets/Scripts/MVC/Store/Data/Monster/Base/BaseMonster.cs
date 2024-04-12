@@ -5,9 +5,11 @@ using UnityEngine;
 namespace Frag {
 
     [CreateAssetMenu(fileName = "Monster", menuName = "ScriptableObject/Monster")]
-    public class Monster : ScriptableObject
+    public class BaseMonster : ScriptableObject
     {
-        public string monsterId;
+        public int monsterId;
+
+        public string monsterName;
 
         public MonsterClass monsterClass;   
         public enum MonsterClass { enemy, eliteEnemy }   
@@ -15,5 +17,9 @@ namespace Frag {
         public GameObject MonsterClassPrefab;      // 角色预制体对象
         
         public int startHealth;                 //初始最大生命值
+
+        public List<BaseIntent> IntentList;
+        
+         
     }
 }

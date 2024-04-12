@@ -14,7 +14,7 @@ namespace Frag
         // Start is called before the first frame update
 
         public Character character;
-        public Monster monster;
+        public BaseMonster monster;
 
         //protected override void Awake()
         //{

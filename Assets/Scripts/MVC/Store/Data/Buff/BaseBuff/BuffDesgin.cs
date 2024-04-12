@@ -1,4 +1,5 @@
 using Frag;
+using System;
 using UnityEngine;
 /// <summary>
 /// buff更新时间枚举
@@ -31,7 +32,7 @@ public enum CallBackPoint {
     OnBeKill
 }
 
-
+[Serializable]
 public class BuffInfo
 {
 

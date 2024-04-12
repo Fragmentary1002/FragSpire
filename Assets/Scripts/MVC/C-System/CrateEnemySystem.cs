@@ -11,10 +11,10 @@ namespace Frag
 
     public class CrateEnemySystem : MonoSingleton<CrateEnemySystem>
     {
-        private List<Monster> enemiesList = new List<Monster>();    // 可能出现的敌人列表  
-        private List<Monster> eliteEnemyList = new List<Monster>(); // 可能出现的精英敌人列表  
-        public List<Monster> enemies;
-        public Monster enemyTest;
+        private List<BaseMonster> enemiesList = new List<BaseMonster>();    // 可能出现的敌人列表  
+        private List<BaseMonster> eliteEnemyList = new List<BaseMonster>(); // 可能出现的精英敌人列表  
+        public List<BaseMonster> enemies;
+        public BaseMonster enemyTest;
         public Transform enemyParent;                              //生成敌人父对象
 
         int tier = 1;
@@ -46,7 +46,7 @@ namespace Frag
         /// 获取随机生成某一批敌人的列表
         /// </summary>
         /// <param name="isEliteFight"></param>
-        private List<Monster> GetCreateEnemyList(bool isEliteFight = false)
+        private List<BaseMonster> GetCreateEnemyList(bool isEliteFight = false)
         {
             return isEliteFight ? eliteEnemyList : enemiesList;
 
