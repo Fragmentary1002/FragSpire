@@ -7,6 +7,9 @@ using UnityEngine.EventSystems;
 using System;
 using UnityEditor.Rendering.Universal.ShaderGUI;
 using static UnityEditor.PlayerSettings;
+using Unity.Burst.CompilerServices;
+using static UnityEngine.UI.Image;
+using Unity.VisualScripting;
 
 
 namespace Frag
@@ -214,7 +217,8 @@ namespace Frag
                     SetBazierArrows();
 
                     //进行射线检测是否碰到怪物
-                    CheckRayToEnemy();
+                    //CheckRayToEnemy();
+                    testFun(eventData);
 
                 }
 
@@ -229,68 +233,104 @@ namespace Frag
             // closeUI -line
             CloseBazierArrows();
         }
-
-        Enemy hitEnemy;
-        private void CheckRayToEnemy()
+        public LayerMask layerMask;
+      
+        private void testFun(PointerEventData eventData)
         {
 
-            // Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            List<RaycastResult> results = new List<RaycastResult>();
+            EventSystem.current.RaycastAll(eventData, results);
 
-            // RaycastHit hit;
-
-
-            Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition); // 将鼠标屏幕位置转换为世界坐标 
-
-            Vector2 origin = Camera.main.gameObject.transform.position; // 射线的起点，通常是当前物体的位置  
-
-            Vector2 direction = mousePos - origin; // 射线的方向，从起点指向鼠标位置  
-
-            // 使用Physics2D.Raycast进行射线检测  
-
-            float distance = 1000f; // 射线的最大距离  
-
-            int enemyLayer = LayerMask.NameToLayer("Enemy");
-
-            int layerMask = 1 << enemyLayer;
-
-            RaycastHit2D hit = Physics2D.Raycast(origin, direction, distance, layerMask);
-
-            // 绘制2D线段模拟射线  
-            Debug.DrawLine(origin, origin + direction * distance, Color.red);
-
-            if (hit.collider != null)
+            foreach (RaycastResult result in results)
             {
-                this.hitEnemy = hit.transform.GetComponent<Enemy>();
+                // 如果需要，可以在这里根据 UI 元素的信息执行相应的操作
+                Debug.Log("Clicked on UI element: " + result.gameObject.name);
 
-                Tool.Log("CheckRayToEnemy");
-
-
-                if (Input.GetMouseButton(0))
-                {
-                    StopAllCoroutines();
-
-                    Cursor.visible = true;
-
-                    //closeui -line
-                    CloseBazierArrows();
-
-                    if (FightCardManager.Instance.TryPlayCard(this.card, this.hitEnemy))
-                    {
-                        animator?.Play("HoverOffCard");
-                        PushCardPool();
-                    }
-                    this.hitEnemy = null;
-                }
             }
+
+            results.Clear();
+        }
+
+        Enemy hitEnemy;
+        private void GetEnemy(Transform tran)
+        {
+            this.hitEnemy = tran.transform.GetComponent<EnemyOwner>().owner;
+
+            Tool.Log("CheckRayToEnemy");
+
+
+            if (Input.GetMouseButton(0))
+            {
+                StopAllCoroutines();
+
+                Cursor.visible = true;
+
+                //closeui -line
+                CloseBazierArrows();
+
+                if (FightCardManager.Instance.TryPlayCard(this.card, this.hitEnemy))
+                {
+                    animator?.Play("HoverOffCard");
+                    PushCardPool();
+                }
+                this.hitEnemy = null;
+            }
+
             else
             {
                 if (this.hitEnemy != null)
                 {
                     this.hitEnemy = null;
                 }
+
+            }
+        }
+
+        [ObsoleteAttribute]
+        private void CheckRayToEnemy()
+        {
+
+            //Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+            //RaycastHit hit;
+
+
+            //Vector2 mousePos = Camera.main.ScreenToViewportPoint(Input.mousePosition); // 将鼠标屏幕位置转换为世界坐标 
+
+
+            Vector2 mousePos = Input.mousePosition;
+
+            Vector2 origin = new Vector2(Camera.main.gameObject.transform.position.x, Camera.main.gameObject.transform.position.y); // 射线的起点，通常是当前物体的位置  
+
+            //Vector2 direction = mousePos - origin; // 射线的方向，从起点指向鼠标位置  
+
+            Vector2 direction = mousePos - origin; // 射线的方向，从起点指向鼠标位置  
+
+            Tool.Log($"mousePos:x={mousePos.x},y={mousePos.y}");
+
+            Tool.Log($"origin:x={origin.x},y={origin.y}");
+
+
+            // 使用Physics2D.Raycast进行射线检测  
+
+            float distance = 10000f; // 射线的最大距离  
+
+            RaycastHit2D hit;
+
+            // 绘制2D线段模拟射线  
+            Debug.DrawLine(origin, origin + direction * distance, Color.red);
+
+            if (Physics2D.Raycast(origin, direction, distance, LayerMask.GetMask("Enemy")))
+            {
+                hit = Physics2D.Raycast(origin, direction, distance, LayerMask.GetMask("Enemy"));
+                GetEnemy(hit.transform);
             }
 
         }
+
+
+
+
         #endregion
 
         #region BazierArrows
@@ -320,9 +360,9 @@ namespace Frag
 
         private void CloseBazierArrows()
         {
-            bazierArrows?.CloseUI();
+            //bazierArrows?.CloseUI();
         }
 
-        #endregion  
+        #endregion
     }
 }

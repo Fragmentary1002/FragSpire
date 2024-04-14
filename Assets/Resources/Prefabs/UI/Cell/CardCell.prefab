@@ -712,6 +712,9 @@ MonoBehaviour:
   cardCostText: {fileID: 910189007302296157}
   cardImage: {fileID: 910189007605977727}
   animator: {fileID: 0}
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!114 &910189007288068915
 MonoBehaviour:
   m_ObjectHideFlags: 0

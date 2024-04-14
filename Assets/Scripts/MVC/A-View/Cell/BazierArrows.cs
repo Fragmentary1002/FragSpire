@@ -50,6 +50,7 @@ namespace Frag
                     {
                         go.transform.SetParent(this.gameObject.transform);
 
+
                         this.arrowNodes.Add(go);
                     }
 
