@@ -40,9 +40,6 @@ namespace Frag
         }
 
 
-        #region 点击事件
-
-
 
         private void OnEnable()
         {
@@ -67,109 +64,6 @@ namespace Frag
 
 
 
-        //// 选择该卡牌的方法 point down
-        //public void SelectCard()
-        //{
-        //    // 告知战斗场景管理器该卡牌已被选择
-        //    //battleSceneManager.selectedCard = this;
-        //    // Debug.Log("选择该卡牌的方法");
-        //}
-
-        //// 取消选择该卡牌的方法 pointer up
-        //public void DeselectCard()
-        //{
-        //    // 告知战斗场景管理器没有卡牌被选择，并播放悬停关闭动画
-        //    //battleSceneManager.selectedCard = null;
-        //    animator?.Play("HoverOffCard");
-        //    // Debug.Log("取消选择该卡牌的方法");
-        //}
-
-        //// 当鼠标悬停在卡牌上时触发的方法 pointer enter
-        //public void HoverCard()
-        //{
-        //    // 如果没有卡牌被选择，则播放悬停打开动画
-        //    // if (battleSceneManager.selectedCard == null)
-        //    animator?.Play("HoverOnCard");
-        //    //Debug.Log("当鼠标悬停在卡牌上时触发的方法");
-        //}
-
-        //// 当鼠标拖拽卡牌时触发的方法 begin drag
-        //public void HandleDrag()
-        //{
-        //    // 暂未实现
-        //    // Debug.Log("当鼠标拖拽卡牌时触发的方法");
-        //}
-
-        //// 当鼠标结束拖拽卡牌时触发的方法 end drag
-        //public void HandleEndDrag()
-        //{
-
-        //    Tool.Log("当鼠标结束拖拽卡牌时触发的方法");
-
-
-        //    animator?.Play("HoverOffCard");
-        //    if (FightCardManager.Instance.PlayCardAndIsSuccess(this.card))
-        //    {
-        //        PushCardPool();
-        //    }
-
-
-
-        //    //Vector3 mousePosition = Input.mousePosition;
-
-        //    //// 将屏幕坐标转换为世界坐标
-        //    ////Ray ray = Camera.main.ScreenPointToRay(mousePosition);
-        //    //Ray ray = Camera.main.ViewportPointToRay(mousePosition);
-        //    //RaycastHit hitInfo;
-
-        //    //// 发射射线，并检查是否击中了游戏对象
-        //    //if (Physics.Raycast(ray, out hitInfo))
-        //    //{
-        //    //    GameObject clickedObject = hitInfo.collider.gameObject;
-
-        //    //    Tool.Log("发射射线，并检查是否击中了游戏对象");
-        //    //    if (FightCardManager.Instance.PlayCardAndIsSuccess(this.card, clickedObject))
-        //    //    {
-        //    //        animator?.Play("HoverOffCard");
-        //    //        PushCardPool();
-        //    //    }
-
-
-        //    //}
-
-        //    //return;
-
-
-        //    //if (card.Type == CardType.Attack)
-        //    //{
-        //    //    // 播放卡牌并执行关闭悬停动画
-        //    //    FightCardManager.Instance.PlayCard(this.card);
-        //    //    animator?.Play("HoverOffCard");
-        //    //}
-        //    //else
-        //    //{
-        //    //    // 如果卡牌类型不是攻击，则直接播放卡牌
-        //    //    animator?.Play("HoverOffCard");
-        //    //    FightCardManager.Instance.PlayCard(this.card);
-        //    //}
-        //    ////animator?.Play("HoverOnCard");
-
-
-        //}
-
-        //// 当放下卡牌时触发的方法 point exit
-        //public void DropCard()
-        //{
-
-        //    // 如果没有卡牌被选择，则播放悬停关闭动画
-        //    //if (battleSceneManager.selectedCard == null)
-        //    animator?.Play("HoverOffCard");
-        //    // Debug.Log("当放下卡牌时触发的方法");
-        //}
-        #endregion
-
-
-
         #region 卡牌ui的操作
 
         public void PushCardPool()
@@ -181,6 +75,7 @@ namespace Frag
 
         #endregion
 
+        #region 点击事件
 
         private int index;
 
@@ -280,7 +175,7 @@ namespace Frag
             // 假设index是一个已经在类作用域中定义的变量，它包含了期望的兄弟索引值  
             //  transform.SetSiblingIndex(index);
         }
-        BazierArrows bazierArrows=null;
+        BazierArrows bazierArrows = null;
         public virtual void OnPointerDown(PointerEventData eventData)
         {
             // Cursor.visible = false;
@@ -291,7 +186,7 @@ namespace Frag
 
             ShowBazierArrows();
 
-          
+
             //关闭所有协同程序
             StopAllCoroutines();
             //启动鼠标操作协同
@@ -311,12 +206,12 @@ namespace Frag
 
                 Vector2 pos;
                 if (RectTransformUtility.ScreenPointToLocalPointInRectangle(
-               transform.parent.GetComponent<RectTransform>(),
+               transform.GetComponent<RectTransform>(),
                eventData.position,
                eventData.pressEventCamera,
                out pos))
                 {
-                    SetBazierArrows(pos);
+                    SetBazierArrows();
 
                     //进行射线检测是否碰到怪物
                     CheckRayToEnemy();
@@ -332,20 +227,38 @@ namespace Frag
 
 
             // closeUI -line
-            CloseLineUI();
+            CloseBazierArrows();
         }
 
         Enemy hitEnemy;
         private void CheckRayToEnemy()
         {
 
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            // Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-            RaycastHit hit;
+            // RaycastHit hit;
 
-            Debug.DrawRay(ray.origin, ray.direction * 10000, Color.red);
 
-            if (Physics.Raycast(ray, out hit, 10000, LayerMask.GetMask("Enemy")))
+            Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition); // 将鼠标屏幕位置转换为世界坐标 
+
+            Vector2 origin = Camera.main.gameObject.transform.position; // 射线的起点，通常是当前物体的位置  
+
+            Vector2 direction = mousePos - origin; // 射线的方向，从起点指向鼠标位置  
+
+            // 使用Physics2D.Raycast进行射线检测  
+
+            float distance = 1000f; // 射线的最大距离  
+
+            int enemyLayer = LayerMask.NameToLayer("Enemy");
+
+            int layerMask = 1 << enemyLayer;
+
+            RaycastHit2D hit = Physics2D.Raycast(origin, direction, distance, layerMask);
+
+            // 绘制2D线段模拟射线  
+            Debug.DrawLine(origin, origin + direction * distance, Color.red);
+
+            if (hit.collider != null)
             {
                 this.hitEnemy = hit.transform.GetComponent<Enemy>();
 
@@ -359,7 +272,7 @@ namespace Frag
                     Cursor.visible = true;
 
                     //closeui -line
-                    CloseLineUI();
+                    CloseBazierArrows();
 
                     if (FightCardManager.Instance.TryPlayCard(this.card, this.hitEnemy))
                     {
@@ -378,7 +291,9 @@ namespace Frag
             }
 
         }
+        #endregion
 
+        #region BazierArrows
         private void ShowBazierArrows()
         {
             PoolMgr.GetInstance().GetObj("Prefabs/UI/Cell/Arrow", (go) =>
@@ -387,7 +302,6 @@ namespace Frag
                 {
                     go.transform.SetParent(this.gameObject.transform.parent.parent);
 
-                    
                     go.transform.position = new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y, 0);
 
                     this.bazierArrows = go.GetComponent<BazierArrows>();
@@ -398,17 +312,17 @@ namespace Frag
             });
         }
 
-        private void SetBazierArrows(Vector2 pos)
+        private void SetBazierArrows()
         {
-            this.bazierArrows?.SetEndPos(pos);
+            this.bazierArrows?.SetEndPos();
         }
 
 
-        private void CloseLineUI()
+        private void CloseBazierArrows()
         {
-            bazierArrows.CloseUI();
+            bazierArrows?.CloseUI();
         }
 
-
+        #endregion  
     }
 }

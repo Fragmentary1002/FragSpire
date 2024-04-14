@@ -54,7 +54,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ArrowHeadPrefabs: {fileID: 39790887439821263, guid: ef2508f7cf1ec354f876c98effbc0e1f, type: 3}
   ArrowNodePrefab: {fileID: 1654202982669936468, guid: fee2366dbafeb8149bc5ec09f07c331a, type: 3}
-  arrowNodeNum: 10
+  arrowNodeNum: 8
   scaleFactor: 0.5
 --- !u!222 &507747450166701954
 CanvasRenderer:

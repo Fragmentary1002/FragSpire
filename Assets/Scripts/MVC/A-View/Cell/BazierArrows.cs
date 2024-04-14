@@ -22,9 +22,7 @@ namespace Frag
 
         #region private Fields
 
-        private Vector2 startPos;
 
-        private Vector2 endPos;
 
         private List<GameObject> arrowNodes = new List<GameObject>();
 
@@ -42,7 +40,6 @@ namespace Frag
 
         public void SetStartPos()
         {
-            this.startPos = this.gameObject.transform.position;
 
 
             for (int i = 0; i < this.arrowNodeNum; i++)
@@ -79,10 +76,10 @@ namespace Frag
             }
         }
 
-        public void SetEndPos(Vector2 pos)
+        public void SetEndPos()
         {
             // transform.GetChild(transform.childCount - 1).GetComponent<RectTransform>().anchoredPosition = pos;
-            endPos = pos;
+
 
             OnUpdate();
 
@@ -97,7 +94,7 @@ namespace Frag
                 PoolMgr.GetInstance().PushObj("Prefabs/UI/Cell/ArrowBody", this.arrowNodes[i]);
             }
 
-            PoolMgr.GetInstance().PushObj("Prefabs/UI/Cell/ArrowHead", this.arrowNodes[arrowNodes.Count-1]);
+            PoolMgr.GetInstance().PushObj("Prefabs/UI/Cell/ArrowHead", this.arrowNodes[arrowNodes.Count - 1]);
 
             arrowNodes.Clear();
         }
@@ -106,20 +103,14 @@ namespace Frag
 
 
         #region Private Methods
-        private void OnEnable()
-        {
-            //this.startPos = GetComponent<RectTransform>();
-
-          
-
-        }
-
 
         public void OnUpdate()
         {
-            this.controlPoints[0] = startPos;
+            this.controlPoints[0] = new Vector2(this.gameObject.transform.position.x, this.gameObject.transform.position.y);
 
-            this.controlPoints[3] = endPos;
+            this.controlPoints[3] = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+
+
 
             //P1=P0+(P3-P0)*vector2(-0.3,0.8)
             this.controlPoints[1] = this.controlPoints[0] + (this.controlPoints[3] - this.controlPoints[0]) * this.controlPointFactors[0];
