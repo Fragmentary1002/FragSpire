@@ -91,7 +91,7 @@ public class GeneratorWindow : EditorWindow
                 Debug.LogError("storeEnum √ª”–…Ë÷√");
                 break;
             case StoreEnum.Buff:
-                CreateNewObj<BuffModel>(GetPath(storeEnum, 2));
+                CreateNewObj<BuffModel>(GetPath(storeEnum, 1));
                 break;
             case StoreEnum.Card:
                 CreateNewObj<BaseCard>(GetPath(storeEnum, 2));
@@ -141,9 +141,8 @@ public class GeneratorWindow : EditorWindow
         string filePath = Path.Combine(defaultDirectory, defaultFileName);
 
 
-
-
         Type buffType = createdClassScript.GetClass();
+
         if (buffType == null)
         {
             Debug.LogError("Failed to get class type from script: " + createdClassScript.name);

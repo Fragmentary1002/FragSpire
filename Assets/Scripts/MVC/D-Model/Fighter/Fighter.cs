@@ -19,7 +19,7 @@ namespace Frag
         public int cur;
     }
 
-
+    [SerializeField]
     public class Fighter : AbstractModel
     {
         public HP hp = new HP();

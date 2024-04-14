@@ -8,6 +8,7 @@ namespace Frag
 
     public class PlayerOwner : MonoBehaviour,IController
     {
+
         public Player owner;
 
         public FighterHealthBarCell healthBar;

@@ -18,16 +18,17 @@ MonoBehaviour:
   startingRelic: {fileID: 11400000, guid: ea4e2fe521fa7e3479c0857b9cb04e5c, type: 2}
   splashArt: {fileID: 4874271375372953105, guid: 4349ec7e9e58ad44f8ceaed79a942102, type: 3}
   startingDeck:
-  - {fileID: 11400000, guid: 92e87eeecb43770489d0baacfaadc28c, type: 2}
-  - {fileID: 11400000, guid: 92e87eeecb43770489d0baacfaadc28c, type: 2}
-  - {fileID: 11400000, guid: 92e87eeecb43770489d0baacfaadc28c, type: 2}
-  - {fileID: 11400000, guid: 02833a937dbe8914e8f1c659c1dc7ab6, type: 2}
-  - {fileID: 11400000, guid: 02833a937dbe8914e8f1c659c1dc7ab6, type: 2}
-  - {fileID: 11400000, guid: 02833a937dbe8914e8f1c659c1dc7ab6, type: 2}
-  - {fileID: 11400000, guid: 8a6f3c1f313088e44a7834bbeb42c97e, type: 2}
-  - {fileID: 11400000, guid: 8a6f3c1f313088e44a7834bbeb42c97e, type: 2}
-  - {fileID: 11400000, guid: 8a6f3c1f313088e44a7834bbeb42c97e, type: 2}
-  - {fileID: 11400000, guid: 8a6f3c1f313088e44a7834bbeb42c97e, type: 2}
-  - {fileID: 11400000, guid: 8a6f3c1f313088e44a7834bbeb42c97e, type: 2}
-  - {fileID: 11400000, guid: 8a6f3c1f313088e44a7834bbeb42c97e, type: 2}
+  - {fileID: 11400000, guid: 604e044c613bb1144897245fa876fded, type: 2}
+  - {fileID: 11400000, guid: 604e044c613bb1144897245fa876fded, type: 2}
+  - {fileID: 11400000, guid: 604e044c613bb1144897245fa876fded, type: 2}
+  - {fileID: 11400000, guid: 604e044c613bb1144897245fa876fded, type: 2}
+  - {fileID: 11400000, guid: 604e044c613bb1144897245fa876fded, type: 2}
+  - {fileID: 11400000, guid: dba7c9c8173300048b4faf502572049b, type: 2}
+  - {fileID: 11400000, guid: dba7c9c8173300048b4faf502572049b, type: 2}
+  - {fileID: 11400000, guid: dba7c9c8173300048b4faf502572049b, type: 2}
+  - {fileID: 11400000, guid: dba7c9c8173300048b4faf502572049b, type: 2}
+  - {fileID: 11400000, guid: e60aef2a1626ef84cb4fe7f0ff3714fd, type: 2}
+  - {fileID: 11400000, guid: e60aef2a1626ef84cb4fe7f0ff3714fd, type: 2}
+  - {fileID: 11400000, guid: e60aef2a1626ef84cb4fe7f0ff3714fd, type: 2}
+  - {fileID: 11400000, guid: e60aef2a1626ef84cb4fe7f0ff3714fd, type: 2}
   startHealth: 100

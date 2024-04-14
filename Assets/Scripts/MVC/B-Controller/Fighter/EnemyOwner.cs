@@ -9,11 +9,17 @@ namespace Frag
 
     public class EnemyOwner : MonoBehaviour, IController
     {
-        public Enemy owner=new Enemy();
+       
+        public Enemy owner;
 
         public FighterHealthBarCell healthBar;
 
         public Transform buffParent;
+
+        private void Start()
+        {
+            owner = this.GetModel<Enemy>();
+        }
 
         public void OnUpdate()
         {

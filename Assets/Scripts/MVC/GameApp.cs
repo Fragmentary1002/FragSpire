@@ -2,6 +2,7 @@ using QFramework;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using XFramework;
 
 namespace Frag
@@ -27,6 +28,9 @@ namespace Frag
             OnInit();
 
         }
+        private void Update()
+        {
+        }
 
         public void OnInit()
         {
@@ -38,7 +42,7 @@ namespace Frag
             SceneManager.Instance.Init(new FightScene());
 
             //Âß¼­²ã ¿¨ÅÆÂß¼­
-              FightCardManager.Instance.Init(character);
+            FightCardManager.Instance.Init(character);
 
             FightTurnController.Instance.Init(FightType.BattleInit);
 

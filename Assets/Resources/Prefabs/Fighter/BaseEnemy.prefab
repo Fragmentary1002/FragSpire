@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5326229901204031291}
   - component: {fileID: 283009168049666320}
   - component: {fileID: 5408016986678622627}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: IntentAmountText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -147,11 +147,11 @@ GameObject:
   m_Component:
   - component: {fileID: 3966966964440119412}
   - component: {fileID: 3999893660223452319}
-  - component: {fileID: 3966966964440119413}
   - component: {fileID: 6906579243204866595}
   - component: {fileID: 6906579243204866604}
   - component: {fileID: 5780476654734089485}
-  m_Layer: 5
+  - component: {fileID: 1128484145272544355}
+  m_Layer: 7
   m_Name: BaseEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -195,51 +195,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthBar: {fileID: 4424014150369472165}
   buffParent: {fileID: 8428317202794467308}
---- !u!114 &3966966964440119413
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3966966964440119403}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 0
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 0}
-          m_TargetAssemblyTypeName: TJ.CardTarget, Assembly-CSharp
-          m_MethodName: PointerEnter
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 1
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 0}
-          m_TargetAssemblyTypeName: TJ.CardTarget, Assembly-CSharp
-          m_MethodName: PointerExit
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!222 &6906579243204866595
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -298,6 +253,32 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!61 &1128484145272544355
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3966966964440119403}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 400, y: 400}
+  m_EdgeRadius: 0
 --- !u!1 &3966966964720921343
 GameObject:
   m_ObjectHideFlags: 0
@@ -309,7 +290,7 @@ GameObject:
   - component: {fileID: 3966966964720921336}
   - component: {fileID: 3966966964720921338}
   - component: {fileID: 3966966964720921337}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: EnemyIcon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -385,7 +366,7 @@ GameObject:
   - component: {fileID: 3966966965652797043}
   - component: {fileID: 3966966965652797052}
   - component: {fileID: 3825797767134028193}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: IntentParent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -465,7 +446,7 @@ GameObject:
   - component: {fileID: 8946094981939991626}
   - component: {fileID: 7991024528192981948}
   - component: {fileID: 500066237726322986}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: IntentIcon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -541,7 +522,7 @@ GameObject:
   - component: {fileID: 5126827670050083134}
   - component: {fileID: 7519526340225950196}
   - component: {fileID: 6906579244476504366}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: Intent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -612,6 +593,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3966966964440119412}
     m_Modifications:
+    - target: {fileID: 1445115733626069933, guid: f69274626d5590c448324303f70825af, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1615774381312579967, guid: f69274626d5590c448324303f70825af, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 1795099869023951862, guid: f69274626d5590c448324303f70825af, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -696,6 +685,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2524254647427419092, guid: f69274626d5590c448324303f70825af, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 3635687598600931822, guid: f69274626d5590c448324303f70825af, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -704,9 +697,45 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4717221502863100822, guid: f69274626d5590c448324303f70825af, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4832650966239163632, guid: f69274626d5590c448324303f70825af, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 5127266007759538185, guid: f69274626d5590c448324303f70825af, type: 3}
       propertyPath: m_Name
       value: FighterHealthBarCell
+      objectReference: {fileID: 0}
+    - target: {fileID: 5127266007759538185, guid: f69274626d5590c448324303f70825af, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5552773885316890803, guid: f69274626d5590c448324303f70825af, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6185934061498357809, guid: f69274626d5590c448324303f70825af, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7279483392892784556, guid: f69274626d5590c448324303f70825af, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7353016063975727518, guid: f69274626d5590c448324303f70825af, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8447866181440318144, guid: f69274626d5590c448324303f70825af, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 9199353936013030517, guid: f69274626d5590c448324303f70825af, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f69274626d5590c448324303f70825af, type: 3}

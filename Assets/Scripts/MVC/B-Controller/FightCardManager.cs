@@ -20,12 +20,17 @@ namespace Frag
 
         public Player player;
 
+        public Enemy enemy;
+
         //public Card TestCard;
         #region 初始化
         public override void Init()
         {
             battleInfo = this.GetModel<BattleInfo>();
 
+            player=this.GetModel<Player>();
+
+            enemy=this.GetModel<Enemy>();  
 
         }
 
@@ -63,7 +68,7 @@ namespace Frag
         /// <summary>
         /// 用于玩家出一张卡片
         /// </summary>
-        public bool PlayCardAndIsSuccess(BaseCard card, GameObject obj)
+        public bool TryPlayCard(BaseCard card, Fighter target = null)
         {
 
             if (card == null)
@@ -82,19 +87,33 @@ namespace Frag
             // if (cardUI.card.cardType != CardTj.CardType.Attack && enemies[0].GetComponent<Fighter>().enrage.buffValue > 0)
             //   enemies[0].GetComponent<Fighter>().AddBuff(Buff.Type.strength, enemies[0].GetComponent<Fighter>().enrage.buffValue);
 
+            Debug.Log("PlayCardAndIsSuccess");
             try
             {
 
-                Player creator = player;
+                // Player play = player;
 
-                Enemy target = obj.transform.GetComponent<EnemyOwner>().owner;
+                //Enemy enemy = obj.transform.GetComponent<EnemyOwner>().owner;
 
-                if (creator != null && target!=null)
+                //Enemy enemy = enemy;
+
+                if (enemy == null)
                 {
-
-                    // 执行卡片的动作。  
-                    card.Apply(creator, target);
+                    Tool.Log("enemy Error", LogLevel.Error);
+                    return false;
                 }
+
+                if (player == null)
+                {
+                    Tool.Log("player Error", LogLevel.Error);
+                    return false;
+                }
+                
+
+                Tool.Log("执行卡片的动作");
+                // 执行卡片的动作。  
+                card.Apply(player, enemy);
+
 
                 battleInfo.enegry.cur -= card.CardCost;
 
@@ -102,9 +121,11 @@ namespace Frag
                 battleInfo.cardsInHand.Remove(card);
 
                 DiscardCard(card);
+
             }
             catch
             {
+                Tool.Log("PlayCard Error", LogLevel.Error);
                 return false;
             }
 
@@ -224,7 +245,6 @@ namespace Frag
 
             // 获取所有子对象上的CardCell组件  
             CardCell[] cardCells = GetComponentsInChildren<CardCell>();
-
             // 遍历这些组件并调用它们的PushCardPool方法  
             foreach (CardCell cardCell in cardCells)
             {

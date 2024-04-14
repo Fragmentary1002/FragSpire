@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e63e734527907849bd149093f0e6fd7, type: 3}
+  m_Name: CradDefend_R
+  m_EditorClassIdentifier: 
+  cardId: 1002
+  isUpgraded: 0
+  cardTitle: Defend_R
+  cardDescription:
+    baseAmount: rap 5
+    upgradedAmount: rap 8
+  cardColor: 0
+  cardIcon: {fileID: 21300000, guid: 13139f097558f3a4691be2d9c64e964e, type: 3}
+  cardCost:
+    baseAmount: 1
+    upgradedAmount: 1
+  cardAttack:
+    baseAmount: 0
+    upgradedAmount: 0
+  cardDefense:
+    baseAmount: 5
+    upgradedAmount: 8
+  type: 0
+  target: 0
+  cardBuff:
+    buffData: {fileID: 0}
+    durationTimer: 0
+    tickTimer: 0
+    curStack: 1
+  buffAmount:
+    baseAmount: 0
+    upgradedAmount: 0
+  targetBuff: 0

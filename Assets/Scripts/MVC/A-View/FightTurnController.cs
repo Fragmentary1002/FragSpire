@@ -22,7 +22,7 @@ namespace Frag
     /// <summary>
     /// 战斗管理类 状态模式 对于战斗状态的切换 利用了FightType切换
     /// </summary>
-    public class FightTurnController :MonoSingleton<FightTurnController> ,IController
+    public class FightTurnController : MonoSingleton<FightTurnController>, IController
     {
 
         public FightUnit fightUnit;//战斗单元
@@ -31,7 +31,7 @@ namespace Frag
         // public FighterCommand fighterCommand = new FighterCommand();
 
         //viewModel
-      //  public FightModel model=new FightModel();
+        //  public FightModel model=new FightModel();
         public BattleInfo battleInfo;
 
         /// <summary>
@@ -87,6 +87,9 @@ namespace Frag
             fightUnit?.OnUpdate();
 
             battleInfo?.UpdateData();
+
+         
+
         }
         //指定架构
         public IArchitecture GetArchitecture()

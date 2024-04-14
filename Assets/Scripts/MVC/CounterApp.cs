@@ -7,6 +7,7 @@ public class CounterApp : Architecture<CounterApp>
     {
         // зЂВс Model
         this.RegisterModel(new Player());
+        this.RegisterModel(new Enemy());
         this.RegisterModel(new BattleInfo());
         
 

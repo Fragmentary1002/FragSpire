@@ -110,7 +110,7 @@ namespace Frag
                     if (playerParent != null)
                     {
                         go.transform.SetParent(playerParent);
-                        FightCardManager.Instance.player = go.GetComponent<PlayerOwner>().owner;
+                        //FightCardManager.Instance.player = go.GetComponent<PlayerOwner>().owner;
                     }
                     else
                     {
@@ -123,7 +123,7 @@ namespace Frag
                     if (enemyParent != null)
                     {
                         go.transform.SetParent(enemyParent);
-
+                       // FightCardManager.Instance.enemy = go.GetComponent<EnemyOwner>().owner;
                     }
                     else
                     {

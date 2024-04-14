@@ -627,7 +627,6 @@ GameObject:
   - component: {fileID: 910189007288068914}
   - component: {fileID: 4127177136885524723}
   - component: {fileID: 910189007288068915}
-  - component: {fileID: 764983090213160671}
   - component: {fileID: 754850709887042001}
   m_Layer: 5
   m_Name: CardCell
@@ -712,7 +711,7 @@ MonoBehaviour:
   cardDescriptionText: {fileID: 910189006819207298}
   cardCostText: {fileID: 910189007302296157}
   cardImage: {fileID: 910189007605977727}
-  discardEffect: {fileID: 6430551114553073417, guid: 6c3fae2cc847b7d4db03643cb9dfacba, type: 3}
+  animator: {fileID: 0}
 --- !u!114 &910189007288068915
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -757,115 +756,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &764983090213160671
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 910189007288068913}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 2
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 4127177136885524723}
-          m_TargetAssemblyTypeName: Frag.CardCell, Assembly-CSharp
-          m_MethodName: SelectCard
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 3
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 4127177136885524723}
-          m_TargetAssemblyTypeName: Frag.CardCell, Assembly-CSharp
-          m_MethodName: DeselectCard
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 0
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 4127177136885524723}
-          m_TargetAssemblyTypeName: Frag.CardCell, Assembly-CSharp
-          m_MethodName: HoverCard
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: HoverOnCard
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 1
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 4127177136885524723}
-          m_TargetAssemblyTypeName: Frag.CardCell, Assembly-CSharp
-          m_MethodName: DropCard
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: HoverOffCard
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 13
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 4127177136885524723}
-          m_TargetAssemblyTypeName: Frag.CardCell, Assembly-CSharp
-          m_MethodName: HandleDrag
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: HoverOffCard
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 14
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 4127177136885524723}
-          m_TargetAssemblyTypeName: Frag.CardCell, Assembly-CSharp
-          m_MethodName: HandleEndDrag
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: HoverOffCard
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!95 &754850709887042001
 Animator:
   serializedVersion: 4
