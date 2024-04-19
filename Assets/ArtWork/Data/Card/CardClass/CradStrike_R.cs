@@ -10,7 +10,7 @@ namespace Frag
        
         public override void Apply(Fighter creator, Fighter target)
         {
-            this.SendCommand<DataAttackCommand>(new DataAttackCommand(new DamageInfo(creator, target, this.CardAttack)));
+            this.SendCommand<DataDamageCommand>(new DataDamageCommand(new DamageInfo(creator, target, this.CardAttack)));
         }
 
     

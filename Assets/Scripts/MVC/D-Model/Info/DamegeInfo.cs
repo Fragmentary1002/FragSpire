@@ -14,6 +14,8 @@ namespace Frag
         public int damage;
         public DamageInfo(Fighter creator,Fighter Target ,int damage, int value = 0, float percentage = 100f)
         {
+            this.creator = creator;
+            this.target = Target;
             this.damage = damage;
             this.value = value;
             this.percentage = percentage;
@@ -21,8 +23,9 @@ namespace Frag
 
         public int GetDamage()
         {
-            damage += this.value;
-            damage *= (int)(this.percentage - 100f);
+            //damage += this.value;
+            //damage *= (int)(this.percentage - 100f);
+            //return damage;
             return damage;
         }
 

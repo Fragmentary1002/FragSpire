@@ -132,7 +132,7 @@ namespace Frag
         private IEnumerator ApplyAttack()
         {
             yield return new WaitForSeconds(0.5f);
-            this.SendCommand<DataAttackCommand>(new DataAttackCommand(new DamageInfo(newEnemyIntent.creator, newEnemyIntent.target, newEnemyIntent.intentAttack)));
+            this.SendCommand<DataDamageCommand>(new DataDamageCommand(new DamageInfo(newEnemyIntent.creator, newEnemyIntent.target, newEnemyIntent.intentAttack)));
 
         }
 

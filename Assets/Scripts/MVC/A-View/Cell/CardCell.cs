@@ -3,18 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
-using UnityEngine.EventSystems;
+
 using System;
-using UnityEditor.Rendering.Universal.ShaderGUI;
-using static UnityEditor.PlayerSettings;
-using Unity.Burst.CompilerServices;
-using static UnityEngine.UI.Image;
-using Unity.VisualScripting;
 
 
 namespace Frag
 {
-    public class CardCell : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerDownHandler
+    public class CardCell : MonoBehaviour
     {
         // 引用卡牌数据
         public BaseCard card;
@@ -37,12 +32,12 @@ namespace Frag
         // 控制卡牌UI动画的Animator组件
         public Animator animator;
 
+        BazierArrows bazierArrows = null;
+
         private void Awake()
         {
             animator = GetComponent<Animator>();
         }
-
-
 
         private void OnEnable()
         {
@@ -56,16 +51,11 @@ namespace Frag
             // 设置卡牌数据并更新UI元素
             this.card = card;
             gameObject.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
-            cardTitleText.text = card.CardTitle;
-            cardDescriptionText.text = card.CardDescription;
-            cardCostText.text = card.CardCost.ToString();
-            cardImage.sprite = card.CardIcon;
+            cardTitleText.text = this.card.CardTitle;
+            cardDescriptionText.text = this.card.CardDescription;
+            cardCostText.text = this.card.CardCost.ToString();
+            cardImage.sprite = this.card.CardIcon;
         }
-
-
-
-
-
 
         #region 卡牌ui的操作
 
@@ -80,10 +70,87 @@ namespace Frag
 
         #region 点击事件
 
+
+        // 选择该卡牌的方法
+        public void OnSelectCard()
+        {
+            // 告知战斗场景管理器该卡牌已被选择
+
+
+        }
+
+        // 取消选择该卡牌的方法
+        public void OnDeselectCard()
+        {
+            // 告知战斗场景管理器没有卡牌被选择，并播放悬停关闭动画
+
+            animator.Play("HoverOffCard");
+        }
+
+        // 当鼠标悬停在卡牌上时触发的方法
+        public void OnHoverCard()
+        {
+            // 如果没有卡牌被选择，则播放悬停打开动画
+
+            animator.Play("HoverOnCard");
+        }
+
+        // 当鼠标拖拽卡牌时触发的方法
+        public void OnHandleDrag()
+        {
+            // 暂未实现
+            Tool.Log("OnPointerDown");
+
+            ShowBazierArrows();
+
+            StartCoroutine(DisPlayArrow());
+        }
+
+        IEnumerator DisPlayArrow()
+        {
+            while (true)
+            {
+                // Tool.Log("OnMouseDownRight");
+                if (Input.GetMouseButtonDown(1))
+                {
+                    if (FightCardManager.Instance.TryPlayCard(this.card))
+                    {
+                        animator?.Play("HoverOffCard");
+                        PushCardPool();
+                    }
+                    break;
+                }
+                SetBazierArrows();
+
+                yield return null;
+            }
+            // StopAllCoroutines();
+            Cursor.visible = true;
+            //closeui -line
+            CloseBazierArrows();
+            yield return null;
+        }
+
+
+        // 当鼠标结束拖拽卡牌时触发的方法
+        public void OnHandleEndDrag()
+        {
+            Tool.Log("OnHandleEndDrag");
+            //ApplyCard();
+        }
+
+        // 当放下卡牌时触发的方法
+        public void OnDropCard()
+        {
+            animator.Play("HoverOffCard");
+        }
+
+
+
         private int index;
 
-        // 当鼠标指针离开该UI元素时触发此函数    
-        public void OnPointerEnter(PointerEventData eventData)
+        // 当鼠标指针进入该UI元素时触发此函数    
+        public void OnPointerEnter()
         {
 
             animator.Play("HoverOnCard");
@@ -109,7 +176,7 @@ namespace Frag
         }
         //鼠标离开
         // 当鼠标指针离开该UI元素时触发此函数  
-        public void OnPointerExit(PointerEventData eventData)
+        public void OnPointerExit()
         {
             animator.Play("HoverOffCard");
             // 在0.25秒内将当前UI元素的缩放比例还原为1（即原始大小）  
@@ -132,7 +199,7 @@ namespace Frag
         Vector2 initPos;
 
         // 当拖拽操作开始时触发此函数  
-        public virtual void OnBeginDrag(PointerEventData eventData)
+        public virtual void OnBeginDrag()
         {
             // 获取当前UI元素的RectTransform组件，并获取其anchoredPosition属性，保存到initPos变量中  
             // 这个属性表示UI元素相对于其父RectTransform的锚点位置  
@@ -143,31 +210,20 @@ namespace Frag
 
 
         // 当拖拽该UI元素时触发此函数  
-        public virtual void OnDrag(PointerEventData eventData)
+        public virtual void OnDrag()
         {
             // 定义一个Vector2类型的变量pos，用于存储从屏幕坐标转换到RectTransform局部坐标的结果  
 
 
-            // 使用RectTransformUtility的ScreenPointToLocalPointInRectangle方法将屏幕坐标转换为RectTransform的局部坐标  
-            // transform.parent.GetComponent<RectTransform>() 获取当前UI元素父元素的RectTransform组件  
-            // eventData.position是当前的屏幕坐标  
-            // eventData.pressEventCamera是触发按压事件的相机  
-            // out pos 是输出参数，用于接收转换后的局部坐标  
-            if (RectTransformUtility.ScreenPointToLocalPointInRectangle(
-                transform.parent.GetComponent<RectTransform>(),
-                eventData.position,
-                eventData.pressEventCamera,
-                out initPos))
-            {
-                // 如果转换成功，将转换后的局部坐标设置为当前UI元素的anchoredPosition  
-                // 这样，UI元素就会跟随鼠标移动  
-                transform.GetComponent<RectTransform>().anchoredPosition = initPos;
-            }
+            // 如果转换成功，将转换后的局部坐标设置为当前UI元素的anchoredPosition  
+            // 这样，UI元素就会跟随鼠标移动  
+            transform.GetComponent<RectTransform>().anchoredPosition = initPos;
+
         }
 
 
         // 当拖拽操作结束时触发此函数  
-        public virtual void OnEndDrag(PointerEventData eventData)
+        public virtual void OnEndDrag()
         {
             // 将UI元素的anchoredPosition设置回拖拽开始时的位置（initPos）  
             transform.GetComponent<RectTransform>().anchoredPosition = initPos;
@@ -178,155 +234,42 @@ namespace Frag
             // 假设index是一个已经在类作用域中定义的变量，它包含了期望的兄弟索引值  
             //  transform.SetSiblingIndex(index);
         }
-        BazierArrows bazierArrows = null;
-        public virtual void OnPointerDown(PointerEventData eventData)
+
+        public virtual void OnPointerDown()
         {
             // Cursor.visible = false;
 
             Tool.Log("OnPointerDown");
 
-            //showUI -line
-
             ShowBazierArrows();
 
 
-            //关闭所有协同程序
-            StopAllCoroutines();
-            //启动鼠标操作协同
-            StartCoroutine(OnMouseDownRight(eventData));
         }
 
-        IEnumerator OnMouseDownRight(PointerEventData eventData)
-        {
-            while (true)
-            {
-                //  Tool.Log("OnMouseDownRight");
-                if (Input.GetMouseButtonDown(1))
-                {
-
-                    break;
-                }
-
-                Vector2 pos;
-                if (RectTransformUtility.ScreenPointToLocalPointInRectangle(
-               transform.GetComponent<RectTransform>(),
-               eventData.position,
-               eventData.pressEventCamera,
-               out pos))
-                {
-                    SetBazierArrows();
-
-                    //进行射线检测是否碰到怪物
-                    //CheckRayToEnemy();
-                    testFun(eventData);
-
-                }
+        //public LayerMask layerMask;
+        //List<RaycastResult> results = new List<RaycastResult>();
+        //[Obsolete]
+        //private void testFun(PointerEventData eventData)
+        //{
 
 
-                yield return null;
+        //    EventSystem.current.RaycastAll(eventData, results);
 
+        //    foreach (RaycastResult result in results)
+        //    {
+        //        // 如果需要，可以在这里根据 UI 元素的信息执行相应的操作
+        //        //Debug.Log("Clicked on UI element: " + result.gameObject.name);
+        //        //Debug.Log($"name={result.gameObject.name},layer={result.gameObject.layer}");
+        //        //Debug.Log(LayerMask.GetMask("Enemy"));
+        //        if (result.gameObject.layer == 7)
+        //        {
+        //            // ApplyCard(result.gameObject);
+        //        }
 
-            }
-            Cursor.visible = true;
+        //    }
 
-
-            // closeUI -line
-            CloseBazierArrows();
-        }
-        public LayerMask layerMask;
-      
-        private void testFun(PointerEventData eventData)
-        {
-
-            List<RaycastResult> results = new List<RaycastResult>();
-            EventSystem.current.RaycastAll(eventData, results);
-
-            foreach (RaycastResult result in results)
-            {
-                // 如果需要，可以在这里根据 UI 元素的信息执行相应的操作
-                Debug.Log("Clicked on UI element: " + result.gameObject.name);
-
-            }
-
-            results.Clear();
-        }
-
-        Enemy hitEnemy;
-        private void GetEnemy(Transform tran)
-        {
-            this.hitEnemy = tran.transform.GetComponent<EnemyOwner>().owner;
-
-            Tool.Log("CheckRayToEnemy");
-
-
-            if (Input.GetMouseButton(0))
-            {
-                StopAllCoroutines();
-
-                Cursor.visible = true;
-
-                //closeui -line
-                CloseBazierArrows();
-
-                if (FightCardManager.Instance.TryPlayCard(this.card, this.hitEnemy))
-                {
-                    animator?.Play("HoverOffCard");
-                    PushCardPool();
-                }
-                this.hitEnemy = null;
-            }
-
-            else
-            {
-                if (this.hitEnemy != null)
-                {
-                    this.hitEnemy = null;
-                }
-
-            }
-        }
-
-        [ObsoleteAttribute]
-        private void CheckRayToEnemy()
-        {
-
-            //Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-            //RaycastHit hit;
-
-
-            //Vector2 mousePos = Camera.main.ScreenToViewportPoint(Input.mousePosition); // 将鼠标屏幕位置转换为世界坐标 
-
-
-            Vector2 mousePos = Input.mousePosition;
-
-            Vector2 origin = new Vector2(Camera.main.gameObject.transform.position.x, Camera.main.gameObject.transform.position.y); // 射线的起点，通常是当前物体的位置  
-
-            //Vector2 direction = mousePos - origin; // 射线的方向，从起点指向鼠标位置  
-
-            Vector2 direction = mousePos - origin; // 射线的方向，从起点指向鼠标位置  
-
-            Tool.Log($"mousePos:x={mousePos.x},y={mousePos.y}");
-
-            Tool.Log($"origin:x={origin.x},y={origin.y}");
-
-
-            // 使用Physics2D.Raycast进行射线检测  
-
-            float distance = 10000f; // 射线的最大距离  
-
-            RaycastHit2D hit;
-
-            // 绘制2D线段模拟射线  
-            Debug.DrawLine(origin, origin + direction * distance, Color.red);
-
-            if (Physics2D.Raycast(origin, direction, distance, LayerMask.GetMask("Enemy")))
-            {
-                hit = Physics2D.Raycast(origin, direction, distance, LayerMask.GetMask("Enemy"));
-                GetEnemy(hit.transform);
-            }
-
-        }
+        //    results.Clear();
+        //}
 
 
 
@@ -360,7 +303,7 @@ namespace Frag
 
         private void CloseBazierArrows()
         {
-            //bazierArrows?.CloseUI();
+            bazierArrows?.CloseUI();
         }
 
         #endregion

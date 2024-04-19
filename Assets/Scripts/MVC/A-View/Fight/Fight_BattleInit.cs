@@ -21,6 +21,7 @@ namespace Frag
 
             // 将玩家的牌堆加入弃牌堆，并洗牌，然后抽一定数量的牌加入手中的卡牌列表中  
             //FightCardManager.Instance.Init();
+            
 
             this.SendCommand(new ApplyTimeCommand(ApplyTime.BattleBegin));
 

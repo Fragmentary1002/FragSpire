@@ -67,7 +67,7 @@ namespace Frag
             }
 
             // 打印造成的伤害值
-            Tool.Log("$\"造成 {amount} 点伤害\"");
+            Tool.Log($"造成 {amount} 点伤害 , hp cur:{hp.cur}");
 
 
             // 实例化伤害指示器，并在一段时间后销毁

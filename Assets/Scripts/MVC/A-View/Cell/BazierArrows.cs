@@ -90,12 +90,14 @@ namespace Frag
         {
             PoolMgr.GetInstance().PushObj("Prefabs/UI/Cell/Arrow", this.gameObject);
 
-            for (int i = 0; i < this.arrowNodeNum; i++)
+            PoolMgr.GetInstance().PushObj("Prefabs/UI/Cell/ArrowHead", this.arrowNodes[arrowNodes.Count - 1]);
+
+            for (int i = arrowNodes.Count-2; i >=0; i--)
             {
                 PoolMgr.GetInstance().PushObj("Prefabs/UI/Cell/ArrowBody", this.arrowNodes[i]);
             }
 
-            PoolMgr.GetInstance().PushObj("Prefabs/UI/Cell/ArrowHead", this.arrowNodes[arrowNodes.Count - 1]);
+            
 
             arrowNodes.Clear();
         }

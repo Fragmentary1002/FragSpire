@@ -4,7 +4,7 @@ using UnityEngine;
 using Unity.VisualScripting;
 using XFramework.Extend;
 using QFramework;
-using static UnityEngine.GraphicsBuffer;
+using System;
 
 namespace Frag
 {
@@ -18,9 +18,7 @@ namespace Frag
 
         private BattleInfo battleInfo;
 
-        public Player player;
 
-        public Enemy enemy;
 
         //public Card TestCard;
         #region 初始化
@@ -28,9 +26,7 @@ namespace Frag
         {
             battleInfo = this.GetModel<BattleInfo>();
 
-            player=this.GetModel<Player>();
-
-            enemy=this.GetModel<Enemy>();  
+            battleInfo.player = this.GetModel<Player>();
 
         }
 
@@ -43,8 +39,11 @@ namespace Frag
         {
             battleInfo = this.GetModel<BattleInfo>();
 
+            battleInfo.player = this.GetModel<Player>();
 
             CardCellParent = transform.GetOrAddComponentInChildren<Transform>("Canvas/FightPanel/Cards");
+
+
             ////赋值玩家卡组
             if (character != null)
             {
@@ -68,7 +67,9 @@ namespace Frag
         /// <summary>
         /// 用于玩家出一张卡片
         /// </summary>
-        public bool TryPlayCard(BaseCard card, Fighter target = null)
+        /// 
+
+        public bool TryPlayCard(BaseCard card)
         {
 
             if (card == null)
@@ -88,32 +89,12 @@ namespace Frag
             //   enemies[0].GetComponent<Fighter>().AddBuff(Buff.Type.strength, enemies[0].GetComponent<Fighter>().enrage.buffValue);
 
             Debug.Log("PlayCardAndIsSuccess");
-            try
-            {
-
-                // Player play = player;
-
-                //Enemy enemy = obj.transform.GetComponent<EnemyOwner>().owner;
-
-                //Enemy enemy = enemy;
-
-                if (enemy == null)
-                {
-                    Tool.Log("enemy Error", LogLevel.Error);
-                    return false;
-                }
-
-                if (player == null)
-                {
-                    Tool.Log("player Error", LogLevel.Error);
-                    return false;
-                }
-                
+            //try
+            //{
 
                 Tool.Log("执行卡片的动作");
                 // 执行卡片的动作。  
-                card.Apply(player, enemy);
-
+                card.Apply(battleInfo.player, battleInfo.target);
 
                 battleInfo.enegry.cur -= card.CardCost;
 
@@ -122,12 +103,12 @@ namespace Frag
 
                 DiscardCard(card);
 
-            }
-            catch
-            {
-                Tool.Log("PlayCard Error", LogLevel.Error);
-                return false;
-            }
+            //}
+            //catch (Exception ex)
+            //{
+            //    Tool.Log("在尝试使用卡片时发生异常: " + ex.Message,LogLevel.Error); // 记录异常信息 
+            //    return false;
+            //}
 
 
             return true;
@@ -156,7 +137,7 @@ namespace Frag
         /// <summary>
         /// 用于将一张卡片放入弃牌堆 
         /// </summary>
-        public void DiscardCard(BaseCard card)
+        private void DiscardCard(BaseCard card)
         {
             if (card == null) { return; }
             // 将卡片添加到弃牌堆中
@@ -168,7 +149,7 @@ namespace Frag
         /// <summary>
         /// 抽牌操作 默认为抽5张
         /// </summary>
-        public void DrawCards(int amountToDraw)
+        public void DrawCards(int amountToDraw = 1)
         {
 
             // 当需要抽取的卡片数量还未满足，并且手牌数量不超过10张时继续循环

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace TJ
 {
-    public class CardTarget : MonoBehaviour
+    public class CardTargetTJ : MonoBehaviour
     {
         // 战斗场景管理器的引用
         BattleSceneManager battleSceneManager;

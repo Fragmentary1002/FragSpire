@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6820900972122980051}
   - component: {fileID: 3994556527894285358}
   - component: {fileID: 507747450166701954}
+  - component: {fileID: -4722547335610341090}
   m_Layer: 6
   m_Name: Arrow
   m_TagString: Untagged
@@ -64,6 +65,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 369905463632919158}
   m_CullTransparentMesh: 1
+--- !u!225 &-4722547335610341090
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 369905463632919158}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
 --- !u!1001 &1968053359134771393
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -5,10 +5,10 @@ using UnityEditor;
 
 namespace Frag
 {
-    public class DamageCommand : AbstractCommand
+    public class DataDamageCommand : AbstractCommand
     {
         private DamageInfo damageInfo;
-        public DamageCommand(DamageInfo damageInfo)
+        public DataDamageCommand(DamageInfo damageInfo)
         {
             this.damageInfo = damageInfo;
         }

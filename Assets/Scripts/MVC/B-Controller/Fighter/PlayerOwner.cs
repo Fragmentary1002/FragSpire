@@ -20,7 +20,7 @@ namespace Frag
         {
             owner=this.GetModel<Player>();
 
-            EventCenter.GetInstance().AddEventListener("Battle", OnUpdate);
+            EventCenter.GetInstance().AddEventListener("Battle", this.OnUpdate);
 
         }
 

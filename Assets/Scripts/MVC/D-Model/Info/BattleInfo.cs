@@ -15,13 +15,18 @@ namespace Frag
 
         public List<BaseCard> drawPile = new List<BaseCard>();                     // ³é¿¨¶Ñ  
 
-
         public List<BaseCard> cardsInHand = new List<BaseCard>();                  // ÊÖÅÆ  
 
 
         public List<BaseCard> discardPile = new List<BaseCard>();                  // ÆúÅÆ¶Ñ  
 
+
         public List<BaseCard> cemeteryPile = new List<BaseCard>();                 //Ä¹µØ¶Ñ
+
+
+        public Player player;
+
+        public Enemy target;
 
         public Enegry enegry = new Enegry();
 
