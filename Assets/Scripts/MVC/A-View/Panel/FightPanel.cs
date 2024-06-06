@@ -146,16 +146,16 @@ namespace Frag
         private void EndTurnClick()
         {
             Debug.Log("EndTurnClick");
-            if (FightTurnController.Instance.fightUnit == null) return;
+            if (FightFSM.Instance.fightUnit == null) return;
 
-            FightTurnController.Instance.fightUnit.OnDestroy();
+            FightFSM.Instance.fightUnit.OnDestroy();
 
             BannerOut();
         }
 
         private void BannerOut()
         {
-            switch (FightTurnController.Instance.fightUnit)
+            switch (FightFSM.Instance.fightUnit)
             {
                 case Fight_PlayerTurn:
                     BannerText.text = "Player's Turn";

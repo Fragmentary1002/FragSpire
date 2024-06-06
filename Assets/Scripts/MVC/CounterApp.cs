@@ -6,8 +6,6 @@ public class CounterApp : Architecture<CounterApp>
     protected override void Init()
     {
         // зЂВс Model
-        this.RegisterModel(new Player());
-        this.RegisterModel(new Enemy());
         this.RegisterModel(new BattleInfo());
         
 

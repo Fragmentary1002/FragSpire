@@ -55,6 +55,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c36cb9b51019f248a4151fd1e84de5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  character: {fileID: 11400000, guid: 8a5301ead8429f14399888634b8bcf62, type: 2}
   healthBar: {fileID: 4424014150369472165}
   buffParent: {fileID: 8428317202794467308}
 --- !u!114 &3966966964440119413

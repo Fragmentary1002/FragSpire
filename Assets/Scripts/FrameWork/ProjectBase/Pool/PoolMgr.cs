@@ -33,9 +33,7 @@ public class PoolData
         //存起来
         poolList.Add(obj);
         //设置父对象
-        //obj.transform.parent = fatherObj.transform;
-        
-        
+        //obj.transform.parent = fatherObj.transform;        
         //ui替换
         obj.transform.SetParent(fatherObj.transform);
     }
@@ -60,6 +58,8 @@ public class PoolData
 
         return obj;
     }
+
+
 
 }
 
@@ -121,7 +121,6 @@ public class PoolMgr : BaseManager<PoolMgr>
             poolDic.Add(name, new PoolData(obj, poolObj));
         }
     }
-
 
     /// <summary>
     /// 清空缓存池的方法 

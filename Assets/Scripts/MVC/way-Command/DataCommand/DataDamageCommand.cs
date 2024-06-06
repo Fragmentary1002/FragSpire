@@ -28,8 +28,7 @@ namespace Frag
             Fighter target = damageInfo.target;
 
 
-            target.DoBeDamage(damageInfo.GetDamage());
-
+            target.DoBeDamage(damageInfo.damage);
 
             CallBackFight(creator, CallBackPoint.OnHit);
 
@@ -53,7 +52,7 @@ namespace Frag
 
         private void CallBackFight(Fighter fighter, CallBackPoint callBackPoint)
         {
-            if (fighter != null) { return; }
+            if (fighter == null) { return; }
 
             LinkedList<BuffInfo> infoList = fighter.buffHandler.buffList;
 

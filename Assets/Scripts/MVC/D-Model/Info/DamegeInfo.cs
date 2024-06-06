@@ -21,13 +21,6 @@ namespace Frag
             this.percentage = percentage;
         }
 
-        public int GetDamage()
-        {
-            //damage += this.value;
-            //damage *= (int)(this.percentage - 100f);
-            //return damage;
-            return damage;
-        }
 
     }
 

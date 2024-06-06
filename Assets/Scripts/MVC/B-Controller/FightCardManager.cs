@@ -25,9 +25,6 @@ namespace Frag
         public override void Init()
         {
             battleInfo = this.GetModel<BattleInfo>();
-
-            battleInfo.player = this.GetModel<Player>();
-
         }
 
 
@@ -38,8 +35,6 @@ namespace Frag
         public void Init(Character character)
         {
             battleInfo = this.GetModel<BattleInfo>();
-
-            battleInfo.player = this.GetModel<Player>();
 
             CardCellParent = transform.GetOrAddComponentInChildren<Transform>("Canvas/FightPanel/Cards");
 
@@ -88,10 +83,21 @@ namespace Frag
             // if (cardUI.card.cardType != CardTj.CardType.Attack && enemies[0].GetComponent<Fighter>().enrage.buffValue > 0)
             //   enemies[0].GetComponent<Fighter>().AddBuff(Buff.Type.strength, enemies[0].GetComponent<Fighter>().enrage.buffValue);
 
-            Debug.Log("PlayCardAndIsSuccess");
-            //try
-            //{
+            if (battleInfo.player == null)
+            {
+                Tool.Log("1");
+            }
+            if (battleInfo.target == null)
+            {
+                Tool.Log("2");
+            }
 
+           // Debug.Log("PlayCardAndIsSuccess");
+
+
+
+            try
+            {  
                 Tool.Log("执行卡片的动作");
                 // 执行卡片的动作。  
                 card.Apply(battleInfo.player, battleInfo.target);
@@ -103,15 +109,23 @@ namespace Frag
 
                 DiscardCard(card);
 
-            //}
-            //catch (Exception ex)
-            //{
-            //    Tool.Log("在尝试使用卡片时发生异常: " + ex.Message,LogLevel.Error); // 记录异常信息 
-            //    return false;
-            //}
+            }
+            catch (Exception ex)
+            {
+                Tool.Log("在尝试使用卡片时发生异常: " + ex.Message, LogLevel.Error); // 记录异常信息 
+                return false;
+            }
 
 
             return true;
+
+        }
+
+
+        public void OnTurn()
+        {
+            DisCardHandAll();
+            this.battleInfo.player.ResetCurrentBlock();
 
         }
 

@@ -15,7 +15,7 @@ public class DataBuffCommand : AbstractCommand
     }
     protected override void OnExecute()
     {
-        target.buffHandler.AddBuff(buffInfo);
+        target.DoAddBuff(buffInfo);
     }
 
 }

@@ -44,7 +44,7 @@ namespace Frag
             //Âß¼­²ã ¿¨ÅÆÂß¼­
             FightCardManager.Instance.Init(character);
 
-            FightTurnController.Instance.Init(FightType.BattleInit);
+            FightFSM.Instance.Init(FightType.BattleInit);
 
 
             Debug.Log("GameManager end");

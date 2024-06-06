@@ -822,9 +822,6 @@ MonoBehaviour:
   cardCostText: {fileID: 910189007302296157}
   cardImage: {fileID: 910189007605977727}
   animator: {fileID: 0}
-  layerMask:
-    serializedVersion: 2
-    m_Bits: 128
 --- !u!114 &910189007288068915
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1242,7 +1239,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.49803922, g: 0.54901963, b: 0.5529412, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 0
