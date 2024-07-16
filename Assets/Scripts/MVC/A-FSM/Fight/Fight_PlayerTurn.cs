@@ -8,7 +8,7 @@ using UnityEngine;
 namespace Frag
 {
     //玩家回合
-    public class Fight_PlayerTurn : FightUnit
+    public class Fight_PlayerTurn : FightUnit, ICanSendCommand
     {
        
         public override void Init()
@@ -26,6 +26,13 @@ namespace Frag
             FightCardManager.Instance.DrawCards(5);
 
 
+        }
+
+
+        //指定架构
+        public IArchitecture GetArchitecture()
+        {
+            return CounterApp.Interface;
         }
 
         public override void OnUpdate()

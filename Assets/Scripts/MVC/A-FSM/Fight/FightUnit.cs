@@ -3,24 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Frag
+
+public class FightUnit
 {
-    public class FightUnit : IController
-    {
-        protected EnemyManager enemyManager;
-        public virtual void Init()
-        {
-            enemyManager = this.GetSystem<EnemyManager>();
-        }
 
-        public virtual void OnUpdate() { }
+    public virtual void Init(){  }
 
-        public virtual void OnDestroy() { }
+    public virtual void OnUpdate() { }
 
-        //Ö¸¶¨¼Ü¹¹
-        public IArchitecture GetArchitecture()
-        {
-            return CounterApp.Interface;
-        }
-    }
+    public virtual void OnDestroy() { }
+
+
 }

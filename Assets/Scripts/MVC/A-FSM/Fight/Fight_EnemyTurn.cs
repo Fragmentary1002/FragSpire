@@ -16,7 +16,7 @@ namespace Frag
 
             //// 开始一个新的协程来处理敌人的回合。
             //StartCoroutine(HandleEnemyTurn());
-            MonoMgr.GetInstance().StartCoroutine(this.enemyManager.DoAllEnemyAction());
+          //  MonoMgr.GetInstance().StartCoroutine(this.enemyManager.DoAllEnemyAction());
 
         }
 
@@ -30,7 +30,7 @@ namespace Frag
 
             //重置玩家防御
             //PlayerActionManager.Instance.ResetCurrentBlock();
-            MonoMgr.GetInstance().StartCoroutine(this.enemyManager.DoAllUpdateIntent());
+          //  MonoMgr.GetInstance().StartCoroutine(this.enemyManager.DoAllUpdateIntent());
             FightFSM.Instance.ChangeType(FightType.Player);
 
         }

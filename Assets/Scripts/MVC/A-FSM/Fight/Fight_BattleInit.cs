@@ -6,9 +6,15 @@ using UnityEngine;
 
 namespace Frag
 {
-    public class Fight_BattleInit : FightUnit
-
+    public class Fight_BattleInit : FightUnit,ICanSendCommand
     {
+        //指定架构
+        public IArchitecture GetArchitecture()
+        {
+            return CounterApp.Interface;
+        }
+
+    
         public override void Init()
         {
             // 实例化一个随机的敌人预制体  可以使用对象池？

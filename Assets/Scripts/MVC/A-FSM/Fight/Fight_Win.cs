@@ -7,7 +7,7 @@ using UnityEngine;
 namespace Frag
 {
     //战斗失败
-    public class Fight_Win : FightUnit
+    public class Fight_Win : FightUnit,ICanSendCommand
     {
         public override void Init()
         {
@@ -20,8 +20,13 @@ namespace Frag
         }
 
 
+        //指定架构
+        public IArchitecture GetArchitecture()
+        {
+            return CounterApp.Interface;
+        }
 
-
+     
         // EndFight方法用于结束战斗，并根据战斗结果执行相应操作
         private void EndFight(bool win)
         {
